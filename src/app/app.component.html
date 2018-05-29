@@ -1,20 +1,285 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div *ngIf="loggedIn">
+        <ng-progress
+        [positionUsing]="'marginLeft'"
+        [direction]="'leftToRightIncreased'"
+        [color]="'#4286f4'"
+        [trickleSpeed]="500" 
+        [thick]="true" 
+        [ease]="'easeInSine'"
+    ></ng-progress>
+            <div id="page-container" class="sidebar-inverse side-scroll page-header-fixed page-header-inverse main-content-boxed">
+                <!-- Sidebar -->
+                <nav id="sidebar">
+                    <!-- Sidebar Scroll Container -->
+                    <div id="sidebar-scroll">
+                        <!-- Sidebar Content -->
+                        <div class="sidebar-content">
+                            <!-- Side Header -->
+                            <div class="content-header content-header-fullrow bg-black-op-10">
+                                <div class="content-header-section text-center align-parent">
+                                    <!-- Close Sidebar, Visible only on mobile screens -->
+                                    <!-- Layout API, functionality initialized in Codebase() -> uiApiLayout() -->
+                                    <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none align-v-r" data-toggle="layout" data-action="sidebar_close">
+                                        <i class="fa fa-times text-danger"></i>
+                                    </button>
+                                    <!-- END Close Sidebar -->
+    
+                                    <!-- Logo -->
+                                    <div class="content-header-item">
+                                        <a class="link-effect font-w700" href="index.html">
+                                            <i class="si si-fire text-primary"></i>
+                                            <span class="font-size-xl text-dual-primary-dark">code</span><span class="font-size-xl text-primary">base</span>
+                                        </a>
+                                    </div>
+                                    <!-- END Logo -->
+                                </div>
+                            </div>
+                            <!-- END Side Header -->
+    
+                            <!-- Side Main Navigation -->
+                            <div class="content-side content-side-full">
+                                <!--
+                                Mobile navigation, desktop navigation can be found in #page-header
+    
+                                If you would like to use the same navigation in both mobiles and desktops, you can use exactly the same markup inside sidebar and header navigation ul lists
+                                -->
+                                <ul class="nav-main">
+                                    <li>
+                                        <a class="active" href="bd_dashboard.html"><i class="si si-compass"></i>Dashboard</a>
+                                    </li>
+                                    <li>
+                                        <a  href="Mock"><i class="si si-compass"></i>Mock</a>
+                                    </li>
+                                    <li>
+                                        <a  href="Statistics"><i class="si si-compass"></i>Statistics</a>
+                                    </li>
+                                    <li>
+                                        <a  href="Statistics"><i class="si si-compass"></i>About UNILAG</a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                            <!-- END Side Main Navigation -->
+                        </div>
+                        <!-- Sidebar Content -->
+                    </div>
+                    <!-- END Sidebar Scroll Container -->
+                </nav>
+                <!-- END Sidebar -->
+    
+                <!-- Header -->
+                <header id="page-header">
+                    <!-- Header Content -->
+                    <div class="content-header">
+                        <!-- Left Section -->
+                        <div class="content-header-section">
+                            <!-- Logo -->
+                            <div class="content-header-item">
+                                <a class="link-effect font-w700 mr-5" href="index.html">
+                                    <i class="si si-fire text-primary"></i>
+                                    <span class="font-size-xl text-dual-primary-dark">code</span><span class="font-size-xl text-primary">base</span>
+                                </a>
+                            </div>
+                            <!-- END Logo -->
+                        </div>
+                        <!-- END Left Section -->
+    
+                        <!-- Middle Section -->
+                        <div class="content-header-section d-none d-lg-block">
+                            <!-- Header Navigation -->
+                            <!--
+                            Desktop Navigation, mobile navigation can be found in #sidebar
+    
+                            If you would like to use the same navigation in both mobiles and desktops, you can use exactly the same markup inside sidebar and header navigation ul lists
+                            If your sidebar menu includes headings, they won't be visible in your header navigation by default
+                            If your sidebar menu includes icons and you would like to hide them, you can add the class 'nav-main-header-no-icons'
+                            -->
+                              <ul class="nav-main-header">
+                          <li routerLinkActive="active" >
+                              <a href="/dashboard"><i class="fas fa-camera-retro"></i>Dashboard</a>
+                          </li>
+                          <li routerLinkActive="active">
+                              <a routerLink="/mock"><i class="si si-magnifier"></i>Mock Examination</a>
+                          </li>
+                          <li routerLinkActive="active">
+                              <a  routerLink="/stat"><i class="si si-action-undo"></i>Statistics</a>
+                          </li>
+                          <li routerLinkActive="active">
+                              <a  routerLink="/stat"><i class="si si-action-undo"></i>About UNILAG</a>
+                          </li>
+                          <li routerLinkActive="active">
+                              <a  routerLink="/stat"><i class="si si-action-undo"></i>Aggregate Checker</a>
+                          </li>
+                      </ul>
+                            <!-- END Header Navigation -->
+                        </div>
+                        <!-- END Middle Section -->
+    
+                        <!-- Right Section -->
+                        <div class="content-header-section">
+    
+                            <!-- User Dropdown -->
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-rounded btn-dual-secondary" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    J. Smith<i class="fas fa-angle-down ml-5"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right min-width-150" aria-labelledby="page-header-user-dropdown">
+                                    <a class="dropdown-item" href="be_pages_generic_profile.html">
+                                        <i class="si si-user mr-5"></i> Profile
+                                    </a>
+                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="be_pages_generic_inbox.html">
+                                        <span><i class="si si-envelope-open mr-5"></i> Inbox</span>
+                                        <span class="badge badge-primary">3</span>
+                                    </a>
+                                    <a class="dropdown-item" href="be_pages_generic_invoice.html">
+                                        <i class="si si-note mr-5"></i> Invoices
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+            
+                                    <!-- Toggle Side Overlay -->
+                                    <!-- Layout API, functionality initialized in Codebase() -> uiApiLayout() -->
+                                    <a class="dropdown-item" href="javascript:void(0)" data-toggle="layout" data-action="side_overlay_toggle">
+                                        <i class="si si-wrench mr-5"></i> Settings
+                                    </a>
+                                    <!-- END Side Overlay -->
+            
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="op_auth_signin.html">
+                                        <i class="si si-logout mr-5"></i> Sign Out
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- END User Dropdown -->
+    
+                            <!-- Toggle Sidebar -->
+                            <!-- Layout API, functionality initialized in Codebase() -> uiApiLayout() -->
+                            <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none" data-toggle="layout" data-action="sidebar_toggle">
+                                <i class="fa fa-navicon"></i>
+                            </button>
+                            <!-- END Toggle Sidebar -->
+                        </div>
+                        <!-- END Right Section -->
+                    </div>
+                    <!-- END Header Content -->
+    
+                    <!-- Header Loader -->
+                    <!-- Please check out the Activity page under Elements category to see examples of showing/hiding it -->
+                    <div id="page-header-loader" class="overlay-header bg-primary">
+                        <div class="content-header content-header-fullrow text-center">
+                            <div class="content-header-item">
+                                <i class="fa fa-sun-o fa-spin text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Header Loader -->
+                </header>
+                <!-- END Header -->
+                <!-- Main Container -->
+                <main id="main-container">
+                    <!-- Page Content -->
+                    <div class="content content-full">
+                        <router-outlet></router-outlet>
+                    </div>
+                    <!-- END Page Content -->
+                </main>
+                <!-- END Main Container -->
+    
+               
+            </div>
+            <!-- END Page Container -->   
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
 
+<div *ngIf="!loggedIn">
+        <div id="page-container" class="main-content-boxed">
+                <!-- Main Container -->
+                <main id="main-container">
+                    <!-- Page Content -->
+                    <div class="bg-gd-emerald">
+                        <div class="hero-static content content-full bg-white invisible" data-toggle="appear">
+                            <!-- Header -->
+                            <div class="py-30 px-5 text-center">
+                                <a class="link-effect font-w700" href="index.html">
+                                    <i class="si si-fire"></i>
+                                    <span class="font-size-xl text-primary-dark">code</span><span class="font-size-xl">base</span>
+                                </a>
+                                <h1 class="h2 font-w700 mt-50 mb-10">Create New Account</h1>
+                                <h2 class="h4 font-w400 text-muted mb-0">Please add your details</h2>
+                            </div>
+                            <!-- END Header -->
+    
+                            <!-- Sign Up Form -->
+                            <div class="row justify-content-center px-5">
+                                <div class="col-sm-8 col-md-6 col-xl-4">
+                                    <!-- jQuery Validation (.js-validation-signup class is initialized in js/pages/op_auth_signup.js) -->
+                                    <!-- For more examples you can check out https://github.com/jzaefferer/jquery-validation -->
+                                    <form class="js-validation-signup" action="be_pages_auth_all.html" method="post">
+                                        <div class="form-group row">
+                                            <div class="col-12">
+                                                <div class="form-material floating">
+                                                    <input type="text" class="form-control" id="signup-username" name="signup-username">
+                                                    <label for="signup-username">Username</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-12">
+                                                <div class="form-material floating">
+                                                    <input type="email" class="form-control" id="signup-email" name="signup-email">
+                                                    <label for="signup-email">Email</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-12">
+                                                <div class="form-material floating">
+                                                    <input type="password" class="form-control" id="signup-password" name="signup-password">
+                                                    <label for="signup-password">Password</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-12">
+                                                <div class="form-material floating">
+                                                    <input type="password" class="form-control" id="signup-password-confirm" name="signup-password-confirm">
+                                                    <label for="signup-password-confirm">Password Confirmation</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row text-center">
+                                            <div class="col-12">
+                                                <label class="css-control css-control-primary css-checkbox">
+                                                    <input type="checkbox" class="css-control-input" id="signup-terms" name="signup-terms">
+                                                    <span class="css-control-indicator"></span>
+                                                    I agree to Terms &amp; Conditions
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row gutters-tiny">
+                                            <div class="col-12 mb-10">
+                                                <button type="submit" class="btn btn-block btn-hero btn-noborder btn-rounded btn-alt-success">
+                                                    <i class="si si-user-follow mr-10"></i> Sign Up
+                                                </button>
+                                            </div>
+                                            <div class="col-6">
+                                                <a class="btn btn-block btn-noborder btn-rounded btn-alt-secondary" href="#" data-toggle="modal" data-target="#modal-terms">
+                                                    <i class="si si-book-open text-muted mr-10"></i> Read Terms
+                                                </a>
+                                            </div>
+                                            <div class="col-6">
+                                                <a class="btn btn-block btn-noborder btn-rounded btn-alt-secondary" href="op_auth_signin.html">
+                                                    <i class="si si-login text-muted mr-10"></i> Sign In
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- END Sign Up Form -->
+                        </div>
+                    </div>
+                    <!-- END Page Content -->
+                </main>
+                <!-- END Main Container -->
+            </div>
+            <!-- END Page Container -->
+</div>

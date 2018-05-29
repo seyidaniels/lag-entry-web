@@ -1,0 +1,230 @@
+<div class="row gutters-tiny invisible mt-4" data-toggle="appear">
+    <!-- Row #1 -->
+    <div class="col-6 col-xl-3">
+        <a class="block block-link-rotate block-transparent text-right bg-primary-lighter" href="javascript:void(0)" (click)="startQuiz(0)" >
+            <div class="block-content block-content-full clearfix">
+                <div class="float-left mt-10 d-none d-sm-block">
+                    <i class="si si-bag fa-3x text-primary"></i>
+                </div>
+                <div class="font-size-h3 font-w600 text-primary-darker">Mathematics </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-6 col-xl-3">
+        <a class="block block-link-rotate block-transparent text-right bg-primary-lighter" href="javascript:void(0)" (click)="startQuiz(1)">
+            <div class="block-content block-content-full clearfix">
+                <div class="float-left mt-10 d-none d-sm-block">
+                    <i class="si si-wallet fa-3x text-primary"></i>
+                </div>
+                <div class="font-size-h3 font-w600 text-primary-darker">English Lang.</div>
+            </div>
+        </a>
+    </div>
+    <div class="col-6 col-xl-3" >
+        <a class="block block-link-rotate block-transparent text-right  bg-primary-lighter"  href="javascript:void(0)"  (click)="startQuiz(2)" >
+            <div class="block-content block-content-full clearfix">
+                <div class="float-left mt-10 d-none d-sm-block">
+                    <i class="si si-envelope-open fa-3x text-primary"></i>
+                </div>
+                <div class="font-size-h3 font-w600 text-primary-darker">Gen. Paper</div>
+            </div>
+        </a>
+    </div>
+    <div class="col-6 col-xl-3">
+        <a class="block block-link-rotate block-transparent text-right bg-primary-lighter" href="javascript:void(0)" (click)="startQuiz(3)">
+            <div class="block-content block-content-full clearfix">
+                <div class="float-left mt-10 d-none d-sm-block">
+                    <i class="si si-users fa-3x text-primary"></i>
+                </div>
+                <div class="font-size-h3 font-w600 text-primary-darker">All Subjects</div>
+            </div>
+        </a>
+    </div>
+    <!-- END Row #1 -->
+</div>
+
+<div class="row gutters-tiny invisible mt-4" data-toggle="appear">
+    <!-- Row #2 -->
+    <div class="col-md-6">
+        <div class="block block-themed block-mode-loading-refresh">
+            <div class="block-header bg-primary">
+                <h3 class="block-title">
+                    Sales <small>This week</small>
+                </h3>
+                <div class="block-options">
+                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+                        <i class="si si-refresh"></i>
+                    </button>
+                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
+                    <button type="button" class="btn-block-option">
+                        <i class="si si-wrench"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="block-content block-content-full">
+                <div class="pull-all">
+                    <!-- Lines Chart Container -->
+                    <canvas class="js-chartjs-dashboard-lines"></canvas>
+                </div>
+            </div>
+            <div class="block-content">
+                <div class="row items-push">
+                    <div class="col-6 col-sm-4 text-center text-sm-left">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">This Month</div>
+                        <div class="font-size-h4 font-w600">720</div>
+                        <div class="font-w600 text-success">
+                            <i class="fa fa-caret-up"></i> +16%
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 text-center text-sm-left">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">This Week</div>
+                        <div class="font-size-h4 font-w600">160</div>
+                        <div class="font-w600 text-danger">
+                            <i class="fa fa-caret-down"></i> -3%
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-4 text-center text-sm-left">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Average</div>
+                        <div class="font-size-h4 font-w600">24.3</div>
+                        <div class="font-w600 text-success">
+                            <i class="fa fa-caret-up"></i> +9%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="block">
+            <div class="block-header block-header-default">
+                <h3 class="block-title">Your O'Level Grade </h3> <span class="small text-danger">20 % of your total aggregate</span>
+                <div class="block-options">
+                    <button type="button" class="btn-block-option">
+                        <i class="si si-wrench"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="block-content">
+                <form action="be_forms_elements_material.html" method="post" onsubmit="return false;">
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <div class="form-material floating open">
+                                <select class="form-control" id="material-select2" name="material-select2">
+                                    <option></option><!-- Empty value for demostrating material select box -->
+                                    <option value="1">A1</option>
+                                    <option value="2">B2</option>
+                                    <option value="3">B3</option>
+                                    <option value="3">C4</option>
+                                    <option value="3">C5</option>
+                                    <option value="3">C6</option>
+
+                                </select>
+                                <label for="material-select2">Mathematics</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-material floating open">
+                                <select class="form-control" id="material-select2" name="material-select2">
+                                    <option></option><!-- Empty value for demostrating material select box -->
+                                    <option value="1">A1</option>
+                                    <option value="2">B2</option>
+                                    <option value="3">B3</option>
+                                    <option value="3">C4</option>
+                                    <option value="3">C5</option>
+                                    <option value="3">C6</option>
+
+                                </select>
+                                <label for="material-select2">English Language</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-material floating open">
+                                <select class="form-control" id="material-select2" name="material-select2">
+                                    <option></option><!-- Empty value for demostrating material select box -->
+                                    <option value="1">A1</option>
+                                    <option value="2">B2</option>
+                                    <option value="3">B3</option>
+                                    <option value="3">C4</option>
+                                    <option value="3">C5</option>
+                                    <option value="3">C6</option>
+
+                                </select>
+                                <label for="material-select2">First Required Subject</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-material floating open">
+                                <select class="form-control" id="material-select2" name="material-select2">
+                                    <option></option><!-- Empty value for demostrating material select box -->
+                                    <option value="1">A1</option>
+                                    <option value="2">B2</option>
+                                    <option value="3">B3</option>
+                                    <option value="3">C4</option>
+                                    <option value="3">C5</option>
+                                    <option value="3">C6</option>
+
+                                </select>
+                                <label for="material-select2">Second Required Subject</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-material floating open">
+                                <select class="form-control" id="material-select2" name="material-select2">
+                                    <option></option><!-- Empty value for demostrating material select box -->
+                                    <option value="1">A1</option>
+                                    <option value="2">B2</option>
+                                    <option value="3">B3</option>
+                                    <option value="3">C4</option>
+                                    <option value="3">C5</option>
+                                    <option value="3">C6</option>
+
+                                </select>
+                                <label for="material-select2">Third Required Subject</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-9">
+                            <button type="submit" class="btn btn-alt-primary btn-lg">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END Row #2 -->
+</div>
+
+<!--  Modals -->
+<div class="modal" id="modal-small" tabindex="-1" role="dialog" aria-labelledby="modal-small" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="block block-themed block-transparent mb-0">
+                <div class="block-content">
+                    <form action="be_forms_elements_material.html" method="post" onsubmit="return false;">
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <div class="form-material floating open">
+                                    <select  class="form-control" id="number"  name="material-select2">
+                                        <option></option><!-- Empty value for demostrating material select box -->
+                                        <option value="1">10</option>
+                                        <option value="2">20</option>
+                                        <option value="3">30</option>
+                                    </select>
+                                    <label for="material-select2">Select Number of Questions</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-alt-success" (click)="start()"  data-dismiss="modal">
+                    <i class="fa fa-check"></i> Start 
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End  -->
