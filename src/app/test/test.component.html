@@ -1,20 +1,51 @@
-<div class="col-md-8 mt-4  offset-md-2">
-    <form action="be_blocks.html" method="post">
-        <div class="block">
-            <div class="block-header block-header-default">
-                <h3 class="block-title">Block Form</h3>
-                <div class="block-options">
-                    <button type="submit" class="btn btn-sm btn-alt-primary">
-                        <i class="fa fa-check"></i> Submit
-                    </button>
-                    <button type="reset" class="btn btn-sm btn-alt-danger">
-                        <i class="fa fa-repeat"></i> Reset
-                    </button>
+<div class="row">
+        <div class="col-md-3 mt-4">
+                <div class="block">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Navigate to Questions</h3>
+                    </div>
+                    <div class="block-content">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination pagination-sm" >
+                                <li class="page-item" *ngFor="let no of questions">
+                                    <a class="page-link" href="javascript:void(0)">{{no}}</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+        </div>
+    <div class="col-md-7 mt-4  ">                                   
+        <form action="be_blocks.html" method="post">
+            <div class="block">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title lead">Mathematics </h3>
+                    <div class="block-options">
+                        <button type="submit" class="btn btn-sm btn-alt-primary">
+                            <i class="fa fa-check"></i> Submit
+                        </button>
+                        <button type="reset" class="btn btn-sm btn-alt-danger">
+                            <i class="fa fa-repeat"></i> Reset
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content">
+                    <p class="lead font-weight-normal">Dolor posuere proin blandit accumsan senectus netus nullam curae, ornare laoreet adipiscing luctus mauris adipiscing pretium eget fermentum, tristique lobortis est ut metus lobortis tortor tincidunt himenaeos habitant quis dictumst proin odio sagittis purus mi, nec taciti vestibulum quis in sit varius lorem sit metus mi.</p>
+                    <nav class="clearfix push mt-4">
+                        <button type="button" class="btn btn-alt-secondary min-width-100 float-right">Next</button>
+                        <button type="button" class="btn btn-alt-secondary min-width-100 float-left">Previous</button>
+                    </nav>
+                    <hr>
+                    <div class="row no-gutters items-push offset-4">
+                        <div class="col-4">
+                            <label class="css-control css-control-lg css-control-primary css-checkbox">
+                                <input type="checkbox" class="css-control-input" checked="">
+                                <span class="css-control-indicator"></span> Large
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="block-content">
-                <p>Dolor posuere proin blandit accumsan senectus netus nullam curae, ornare laoreet adipiscing luctus mauris adipiscing pretium eget fermentum, tristique lobortis est ut metus lobortis tortor tincidunt himenaeos habitant quis dictumst proin odio sagittis purus mi, nec taciti vestibulum quis in sit varius lorem sit metus mi.</p>
-            </div>
-        </div>
-    </form>
+        </form>
+        </div> 
 </div>

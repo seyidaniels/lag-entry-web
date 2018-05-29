@@ -15,7 +15,15 @@ export class TestComponent implements OnInit {
   subject;
   number;
 
+  questions = [
+  ];
+
   ngOnInit() {
+
+
+    for (let i = 1; i < 11; i++) {
+      this.questions.push(i);
+    }
     this.route.params.switchMap(
       (params: Params) => {
         this.subject = params['subject'];
