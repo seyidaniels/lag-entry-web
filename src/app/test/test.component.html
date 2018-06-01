@@ -1,51 +1,75 @@
-<div class="row">
-        <div class="col-md-3 mt-4">
-                <div class="block">
-                    <div class="block-header block-header-default">
-                        <h3 class="block-title">Navigate to Questions</h3>
-                    </div>
-                    <div class="block-content">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination pagination-sm" >
-                                <li class="page-item" *ngFor="let no of questions">
-                                    <a class="page-link" href="javascript:void(0)">{{no}}</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-        </div>
-    <div class="col-md-7 mt-4  ">                                   
-        <form action="be_blocks.html" method="post">
+<app-time></app-time>   
+<div class="row" *ngIf="questions">
+    <div class="col-md-4 mt-4">
             <div class="block">
                 <div class="block-header block-header-default">
-                    <h3 class="block-title lead">Mathematics </h3>
-                    <div class="block-options">
-                        <button type="submit" class="btn btn-sm btn-alt-primary">
-                            <i class="fa fa-check"></i> Submit
-                        </button>
-                        <button type="reset" class="btn btn-sm btn-alt-danger">
-                            <i class="fa fa-repeat"></i> Reset
-                        </button>
-                    </div>
+                    <h3 class="block-title">Navigate to Questions</h3>
                 </div>
                 <div class="block-content">
-                    <p class="lead font-weight-normal">Dolor posuere proin blandit accumsan senectus netus nullam curae, ornare laoreet adipiscing luctus mauris adipiscing pretium eget fermentum, tristique lobortis est ut metus lobortis tortor tincidunt himenaeos habitant quis dictumst proin odio sagittis purus mi, nec taciti vestibulum quis in sit varius lorem sit metus mi.</p>
-                    <nav class="clearfix push mt-4">
-                        <button type="button" class="btn btn-alt-secondary min-width-100 float-right">Next</button>
-                        <button type="button" class="btn btn-alt-secondary min-width-100 float-left">Previous</button>
-                    </nav>
-                    <hr>
-                    <div class="row no-gutters items-push offset-4">
-                        <div class="col-4">
-                            <label class="css-control css-control-lg css-control-primary css-checkbox">
-                                <input type="checkbox" class="css-control-input" checked="">
-                                <span class="css-control-indicator"></span> Large
-                            </label>
-                        </div>
+                    <div class="row">
+                            <div class="btn-group mt-2 mr-2 ml-2" role="group" aria-label="Basic example" *ngFor="let no of questions; let i = index;">
+                                    <button type="button" (click) = "toQuestion(i)" [ngClass]="{active: userAnswer[i]}"  class="btn btn-secondary btn-xs">{{i+1}}</button>
+                            </div>
                     </div>
                 </div>
             </div>
-        </form>
-        </div> 
+    </div>
+<div class="col-md-7 mt-4 " *ngIf="questions" >                                   
+        <div class="block" >
+            <div class="block-header block-header-default">
+                <h3 class="block-title lead">{{getSubjectName()}}: Question Number {{i+1}}</h3>
+                <div class="block-options">
+                    <button class="btn btn-md btn-alt-primary" (click)="submit()" >
+                        <i class="fa fa-check"></i> Submit
+                    </button>
+                    <button (click) ="reset()" class="btn btn-md btn-alt-danger">
+                        <i class="fa fa-repeat"></i> Reset
+                    </button>
+                    
+                </div>
+            </div>
+            <div class="block-content" >
+                <p class="lead font-weight-normal"> {{questions[i].question}} </p>
+                <nav class="clearfix push mt-4">
+                    <button type="button" class="btn btn-alt-secondary min-width-100 float-right sticky-top" (click) = "next(i)" placement="top" ngbTooltip="Next Question">Next</button>
+                    <button type="button" class="btn btn-alt-secondary min-width-100 float-left sticky-top" (click) ="previous(i)" placement="top" ngbTooltip="Previous Question">Previous</button>
+                </nav>
+                <hr>
+                <div class="row no-gutters items-push">
+                    <div class="col-12">
+                        <label class="css-control css-control-lg css-control-primary css-checkbox">
+                            <input type="radio" class="css-control-input" name="user_answer" [(ngModel)]="userAnswer[i]" value="a">
+                            <span class="css-control-indicator"></span> {{questions[i].optiona}}
+                        </label>
+                    </div>
+                    <div class="col-12">
+                            <label class="css-control css-control-lg css-control-primary css-checkbox">
+                                <input type="radio" class="css-control-input" name="user_answer" [(ngModel)]="userAnswer[i]" value="b">
+                                <span class="css-control-indicator"></span> {{questions[i].optionb}}
+                            </label>
+                    </div>
+                    <div class="col-12 ">
+                                <label class="css-control css-control-lg css-control-primary css-checkbox">
+                                    <input type="radio" class="css-control-input" name="user_answer" [(ngModel)]="userAnswer[i]" value="c">
+                                    <span class="css-control-indicator"></span> {{questions[i].optionc}}
+                                </label>
+                     </div>
+                    <div class="col-12">
+                                <label class="css-control css-control-lg css-control-primary css-checkbox">
+                                    <input type="radio" class="css-control-input" name="user_answer" [(ngModel)]="userAnswer[i]" value="d">
+                                    <span class="css-control-indicator"></span> {{questions[i].optiond}}
+                                </label>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-info" (click) = "userAnswer[i] = ''">Clear Selected Answer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
 </div>
+
+
+
+
+

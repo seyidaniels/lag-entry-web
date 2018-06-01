@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   loggedIn = true;
 
 
+
   dashboardScripts = [
     'assets/js/pages/chart.min.js',
     'assets/js/pages/dashboard.js'
