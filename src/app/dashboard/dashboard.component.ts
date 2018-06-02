@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
 
 
   startQuiz(value) {
-    $('#modal-small').modal('show');
+    $('#modal-fadein').modal('show');
     this.selected = value;
   }
 

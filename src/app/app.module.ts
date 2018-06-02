@@ -15,6 +15,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import {CountDown} from 'ng4-date-countdown-timer';
 import { TimeComponent } from './time/time.component';
+import { ResultComponent } from './result/result.component';
 
 
 
@@ -27,7 +28,8 @@ import { TimeComponent } from './time/time.component';
     ProfileComponent,
     TestComponent,
     CountDown,
-    TimeComponent
+    TimeComponent,
+    ResultComponent
   ],
   imports: [
     AppRoutingModule,

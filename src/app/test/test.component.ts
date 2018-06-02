@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import { AppService } from '../app.service';
 import {NgProgress} from 'ngx-progressbar';
 declare var $;
@@ -14,6 +14,7 @@ export class TestComponent implements OnInit {
     private route: ActivatedRoute,
     private appService: AppService,
     private progressService: NgProgress,
+    private router: Router
   ) { }
 
   alert;
@@ -100,9 +101,27 @@ toQuestion (i) {
 
 
 submit() {
+  $('#modal-slideup').modal('show');
  console.log(this.calculate());
 }
 
+
+makeid() {
+  let text = '';
+ const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  for (let i = 0; i < 10; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+}
+
+confirmSubmit() {
+  const randomGen = this.makeid();
+  const dateSubmitted = new Date().getDate();
+  const score = this.calculate();
+  this.appService.saveAnswerResult(this.questions, this.userAnswer, score, randomGen);
+  this.router.navigate(['result', randomGen]);
+}
 
 
 

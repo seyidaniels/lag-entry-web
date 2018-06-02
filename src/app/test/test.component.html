@@ -1,4 +1,6 @@
-<app-time></app-time>   
+<div *ngIf="alert">
+        
+</div>
 <div class="row" *ngIf="questions">
     <div class="col-md-4 mt-4">
             <div class="block">
@@ -20,10 +22,10 @@
                 <h3 class="block-title lead">{{getSubjectName()}}: Question Number {{i+1}}</h3>
                 <div class="block-options">
                     <button class="btn btn-md btn-alt-primary" (click)="submit()" >
-                        <i class="fa fa-check"></i> Submit
+                        <i class="fas fa-check"></i> Submit
                     </button>
                     <button (click) ="reset()" class="btn btn-md btn-alt-danger">
-                        <i class="fa fa-repeat"></i> Reset
+                        <i class="fas fa-repeat"></i> Reset
                     </button>
                     
                 </div>
@@ -68,6 +70,53 @@
         </div>
     </div> 
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modals -->
+
+<div class="modal fade" id="modal-slideup" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-slideup" role="document">
+        <div class="modal-content">
+            <div class="block block-themed block-transparent mb-0">
+                <div class="block-header bg-primary-dark">
+                    <h3 class="block-title">Are you sure you want to submit</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                            <i class="si si-close"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content">
+                    <p>By clicking submit, you would be directed to your results page! Do make sure you have answered all questions! </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-alt-success" (click)="confirmSubmit()" data-dismiss="modal">
+                    <i class="fas fa-check"></i> Confirm Submission
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modals -->
 
 
 

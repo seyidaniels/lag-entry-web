@@ -10,48 +10,46 @@ export class TimeComponent implements OnInit {
 
   constructor() { }
 
-  endTime = {
-    minutes: 0,
-    seconds: 0
-  };
+ minutes;
+ seconds;
+ dateObj = new Date();
+ month = this.dateObj.getUTCMonth() + 1; //months from 1-12
+day = this.dateObj.getUTCDate();
+year = this.dateObj.getUTCFullYear();
 
   ngOnInit() {
-    this.datTime();
+    this.countTime();
   }
 
-  datTime() {
-    // Set the date we're counting down to
-  const countDownDate = new Date('Sep 5, 2018 15:37:25').getTime();
-
-  // Update the count down every 1 second
-  const x = setInterval(function() {
-    // Get todays date and time
-    const now = new Date().getTime();
-    // Find the distance between now an the count down date
-    const distance = this.countDownDate - this.now;
-    // Time calculations for days, hours, minutes and seconds
-     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    // Display the result in the element with id='demo'
-    document.getElementById('demo').innerHTML = days + 'd ' + hours + 'h '
-    + minutes + 'm ' + seconds + 's ';
-    // If the count down is finished, write some text
-    if (distance < 0) {
-      clearInterval(this.x);
-      document.getElementById('demo').innerHTML = 'EXPIRED';
-    }
-  }, 1000);
+  countTime() {
+    const startDate = new Date(2018, 11, 25).getTime();
+    const endTime = new Date().getTime();
+    const distance = startDate - endTime;
+    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const s =  Math.floor((distance % (1000 * 60)) / 1000);
+    this.minutes = m;
+    this.seconds = s;
+    document.getElementById('minutes').textContent = ' ' + m;
+    document.getElementById('seconds').textContent = ' ' + s;
+    setInterval(this.countTime, 1000);
   }
 
 
-  quizTime() {
-    const date = new Date();
-  const currentTime = date.getTime();
-  const endTime = currentTime + 30 - 60000;
-  return endTime - currentTime;
-  }
+
+
+
+
+
+
+
+
+
+  // quizTime() {
+  // const date = new Date();
+  // const currentTime = date.getTime();
+  // const endTime = currentTime + 30 * 60000;
+  // return endTime - currentTime;
+  // }
 
 
 }

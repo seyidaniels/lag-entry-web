@@ -8,6 +8,13 @@ const headers = new HttpHeaders({'Content-Type': 'application/json'});
 @Injectable()
 export class AppService {
 
+  sharedData = {
+    questions: [],
+    answers: [],
+    score: 0,
+    token: 0
+  };
+
   constructor(private http: HttpClient) { }
 
 
@@ -16,6 +23,19 @@ export class AppService {
       .pipe(
         catchError(this.handleError('getQuotes', []))
       );
+  }
+
+
+  saveAnswerResult(questions, answers, score, randomGen) {
+    this.sharedData.questions = questions;
+    this.sharedData.answers = answers;
+    this.sharedData.score = score;
+    this.sharedData.token = randomGen;
+    console.log(this.sharedData);
+  }
+
+  getResults() {
+    return this.sharedData;
   }
 
 
