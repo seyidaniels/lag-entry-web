@@ -1,3 +1,165 @@
-<p>
-    Mock Works
-</p>
+<div *ngIf="welcomepage">
+        <div class="col-md-6 offset-md-3 offset-lg-3 mt-100" >
+                <div class="block block-themed block-rounded">
+                    <div class="block-header bg-gd-sea">
+                        <h3 class="block-title">MOCK Practice Examination</h3>
+                    </div>
+                    <div class="block-content">
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                            Eaque illo fugiat debitis voluptas magnam, harum blanditiis cumque ad
+                            facere voluptatibus, necessitatibus consequuntur recusandae quisquam praesentium 
+                            commodi in id accusamus pariatur!</p>
+                        <p class="text-cener">
+                                <button class="btn btn-danger btn-lg my-10" (click) ="welcomepage = !welcomepage">
+                                        Proceed!
+                                </button>
+                         </p>
+                    </div>
+                </div>
+            </div>
+</div>
+
+
+<div *ngIf="!welcomepage">
+    <div class="row" *ngIf="questions" >
+            <div class="col-md-5 mt-4">
+                    <div class="row" *ngIf="questions">
+                            <div class="col-12">
+                                   <app-time (timeup) ="timeUp($event)"></app-time>
+                            </div>
+                    </div>
+                 <div class="row">
+                        <div class="col-12">
+                                <div class="block">
+                                        <div class="block-header block-header-default">
+                                            <h3 class="block-title">Navigate to Questions</h3>
+                                        </div>
+                                        <div class="block-content">
+                                            <div class="row">
+                                                    <div class="btn-group mt-2 mr-2 ml-2" role="group" aria-label="Basic example" *ngFor="let no of questions; let i = index;">
+                                                            <button type="button" (click) = "toQuestion(i)" [ngClass]="{active: userAnswer[i]}"  class="btn btn-secondary btn-xs"><p *ngIf="i < 9">0{{i+1}}</p><p *ngIf="i >= 10">{{i+1}}</p> <p *ngIf="i == 9">{{i+1}}</p></button>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                          </div>
+                 </div>
+                 
+            </div>
+        <div class="col-md-7 mt-4 ">                                   
+                <div class="block" >
+                        <div>
+                                <ngb-alert *ngIf="successMessage" type="info" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                        </div>
+                    <div class="block-header block-header-default">
+                        
+                        <h3 class="block-title lead">Question Number {{i+1}}</h3>
+                        <div class="block-options">
+                            <button class="btn btn-md btn-alt-primary" (click)="submit()" >
+                                <i class="fas fa-check"></i> Submit
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content" >
+                        <p class="lead font-weight-normal"> {{questions[i].question}} </p>
+                        <nav class="clearfix push mt-4">
+                            <button type="button" class="btn btn-alt-secondary min-width-100 float-right sticky-top" (click) = "next(i)" placement="top" ngbTooltip="Next Question">Next</button>
+                            <button type="button" class="btn btn-alt-secondary min-width-100 float-left sticky-top" (click) ="previous(i)" placement="top" ngbTooltip="Previous Question">Previous</button>
+                        </nav>
+                        <hr>
+                        <div class="row no-gutters items-push">
+                            <div class="col-12">
+                                <label class="css-control css-control-lg css-control-success css-radio">
+                                    <input type="radio" class="css-control-input" name="user_answer" [(ngModel)]="userAnswer[i]" value="a">
+                                    <span class="css-control-indicator"></span> {{questions[i].optiona}}
+                                </label>
+                            </div>
+                            <div class="col-12">
+                                    <label class="css-control css-control-lg css-control-success css-radio">
+                                        <input type="radio" class="css-control-input" name="user_answer" [(ngModel)]="userAnswer[i]" value="b">
+                                        <span class="css-control-indicator"></span> {{questions[i].optionb}}
+                                    </label>
+                            </div>
+                            <div class="col-12 ">
+                                        <label class="css-control css-control-lg css-control-success css-radio">
+                                            <input type="radio" class="css-control-input" name="user_answer" [(ngModel)]="userAnswer[i]" value="c">
+                                            <span class="css-control-indicator"></span> {{questions[i].optionc}}
+                                        </label>
+                            </div>
+                            <div class="col-12">
+                                        <label class="css-control css-control-lg css-control-success css-radio">
+                                            <input type="radio" class="css-control-input" name="user_answer" [(ngModel)]="userAnswer[i]" value="d">
+                                            <span class="css-control-indicator"></span> {{questions[i].optiond}}
+                                        </label>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-info" (click) = "userAnswer[i] = ''">Clear Selected Answer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div> 
+    </div>
+    <div *ngIf="!questions">
+        <div class="hero-inner">
+            <div class="content content-full">
+                <div class="py-30 text-center">
+                    <div class="display-3 text-flat">
+                        <i class="fas fa-times"></i> 500
+                    </div>
+                    <h3 class="h2 font-w700 mt-30 mb-10">Oops.. 😭 Could not fetch Questions</h3>
+                    <a class="btn btn-hero btn-rounded btn-alt-secondary" href="/">
+                        <i class="fas fa-arrow-left mr-10"></i> Go Back
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modals -->
+
+<div class="modal fade" id="modal-slideup" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-slideup" role="document">
+        <div class="modal-content">
+            <div class="block block-themed block-transparent mb-0">
+                <div class="block-header bg-primary-dark">
+                    <h3 class="block-title">Are you sure you want to submit</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                            <i class="si si-close"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content">
+                    <p>By clicking submit, you would be directed to your results page! Do make sure you have answered all questions! </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-alt-success" (click)="confirmSubmit()" data-dismiss="modal">
+                    <i class="fas fa-check"></i> Confirm Submission
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modals -->

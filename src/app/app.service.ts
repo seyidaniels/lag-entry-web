@@ -12,39 +12,88 @@ export class AppService {
     questions: [],
     answers: [],
     score: 0,
-    token: 0
+    subject: '',
+    randomGen: 0,
+    percentage: 0,
+    correctanswers: []
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
+  getUserDetails() {
+    const token = this.getToken();
+    return this.http.get('http://localhost:8000/api/get-user?token=' + token ).pipe(
+      catchError(this.handleError('getQuotes', []))
+    );
+  }
 
   getQuestions (subject, number): Observable<any> {
-    return this.http.get('http://localhost:8000/api/get-questions/' + subject + '/' + (number), {headers: headers})
+    const token = this.getToken();
+    const body = {
+      subject: subject,
+      number: number
+    };
+    return this.http.post('http://localhost:8000/api/get-questions?token=' + token, body, {headers: headers})
       .pipe(
         catchError(this.handleError('getQuotes', []))
       );
   }
 
 
-  saveAnswerResult(questions, answers, score, randomGen) {
+  saveAnswerResult(questions, answers, score, subject, randomGen, percentage) {
     this.sharedData.questions = questions;
     this.sharedData.answers = answers;
     this.sharedData.score = score;
-    this.sharedData.token = randomGen;
-    console.log(this.sharedData);
+    this.sharedData.subject = subject;
+    this.sharedData.randomGen = randomGen;
+    this.sharedData.percentage = percentage;
+  }
+
+  deleteResult(uniqueKey) {
+    const token = this.getToken();
+    return this.http.delete('http://localhost:8000/api/delete-result/' + uniqueKey + '?token=' + token ).pipe(
+      catchError(this.handleError('getQuotes', []))
+    );
   }
 
   getResults() {
     return this.sharedData;
   }
 
+  getPastResults() {
+    const token = this.getToken();
+    return this.http.get('http://localhost:8000/api/past-results?token=' + token ).pipe(
+      catchError(this.handleError('getQuotes', []))
+    );
+  }
+
+  saveResult(body) {
+    const token = this.getToken();
+    return this.http.post('http://localhost:8000/api/save-result?token=' + token, body, {headers: headers} ).pipe(
+      catchError(this.handleError('getQuotes', []))
+    );
+  }
+
+  getMockQuestions() {
+    const token = this.getToken();
+    return this.http.get('http://localhost:8000/api/get-mock-questions?token=' + token)
+      .pipe(
+        catchError(this.handleError('getQuotes', []))
+      );
+  }
 
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+      console.error(error['status']); // log to console instead
+      if (error['status'] === 401) {
+        localStorage.removeItem('token');
+        location.reload();
+      }
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
@@ -72,6 +121,10 @@ export class AppService {
         document.getElementById('scripts_page').appendChild(node);
       }
     }
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
   }
 
 

@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgProgressModule } from 'ngx-progressbar';
 import {HttpModule} from '@angular/http';
@@ -12,10 +13,14 @@ import { ProfileComponent } from './profile/profile.component';
 import { TestComponent } from './test/test.component';
 import {HttpClientModule, HttpHeaders} from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {CountDown} from 'ng4-date-countdown-timer';
 import { TimeComponent } from './time/time.component';
 import { ResultComponent } from './result/result.component';
+import { environment } from '../environments/environment';
+import { AuthService } from './auth.service';
+import { AuthenticationComponent } from './authentication/authentication.component';
+import { MockResultComponent } from './mock-result/mock-result.component';
 
 
 
@@ -29,18 +34,22 @@ import { ResultComponent } from './result/result.component';
     TestComponent,
     CountDown,
     TimeComponent,
-    ResultComponent
+    ResultComponent,
+    AuthenticationComponent,
+    MockResultComponent
   ],
   imports: [
+    CommonModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     NgProgressModule,
     HttpModule,
     HttpClientModule,
     NgbModule.forRoot()
   ],
-  providers: [AppService],
+  providers: [AppService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -2,6 +2,9 @@ import { Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import { AppService } from '../app.service';
 import {NgProgress} from 'ngx-progressbar';
+import {Subject} from 'rxjs/Subject';
+import {debounceTime} from 'rxjs/operators';
+
 declare var $;
 @Component({
   selector: 'app-test',
@@ -16,16 +19,18 @@ export class TestComponent implements OnInit {
     private progressService: NgProgress,
     private router: Router
   ) { }
-
-  alert;
+  staticAlertClosed = false;
+  value = 'danger';
   name = 'Seyi Daniels';
   subject;
   number;
   i = 0;
-  staticAlertClosed = false;
+  successMessage;
   correctAnswers: any;
 
   questions = [''];
+
+  private _success = new Subject<string>();
 
   userAnswer = new Array(this.questions.length);
 
@@ -36,15 +41,12 @@ export class TestComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => this.staticAlertClosed = true, 20000);
-    console.log(this.questions);
-    console.log(this.name);
     this.route.params.switchMap(
       (params: Params) => {
         this.subject = params['subject'];
         this.number = params['number'];
         if (typeof params['number'] !== 'undefined' &&
           params['number'] !== null) {
-            console.log(this.subject, this.number);
             this.progressService.start();
               setTimeout(() => {
                 this.progressService.set(0.1);
@@ -57,14 +59,15 @@ export class TestComponent implements OnInit {
       }
     ).subscribe(
       data => {
-        console.log(data['questions'].length);
         this.progressService.done();
         this.questions = data['questions'];
-        console.log(this.questions);
         return;
       }
       );
-  this.alert = 'Error Fetching Questions';
+      this._success.subscribe((message) => this.successMessage = message);
+      this._success.pipe(
+        debounceTime(5000)
+      ).subscribe(() => this.successMessage = null);
         return;
   }
   calculate(): number {
@@ -83,7 +86,7 @@ export class TestComponent implements OnInit {
       this.i = i + 1;
       return;
     }
-    this.alert = 'This is the last question';
+    this._success.next(`This is the last question`);
 }
 
 previous(i) {
@@ -91,7 +94,7 @@ previous(i) {
     this.i = i - 1;
     return;
   }
-    this.alert = 'This is the first question';
+    this._success.next(`This is the first question `);
 }
 
 toQuestion (i) {
@@ -102,7 +105,6 @@ toQuestion (i) {
 
 submit() {
   $('#modal-slideup').modal('show');
- console.log(this.calculate());
 }
 
 
@@ -119,7 +121,8 @@ confirmSubmit() {
   const randomGen = this.makeid();
   const dateSubmitted = new Date().getDate();
   const score = this.calculate();
-  this.appService.saveAnswerResult(this.questions, this.userAnswer, score, randomGen);
+  const percentage = (score / this.number) * 100;
+  this.appService.saveAnswerResult(this.questions, this.userAnswer, score, this.getSubjectName(), randomGen, percentage);
   this.router.navigate(['result', randomGen]);
 }
 

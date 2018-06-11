@@ -166,8 +166,8 @@ var Codebase = function() {
                         lMain.css('min-height', hWindow - hHeader - hFooter);
                     }
 
-                    // Show footer's content
-                    lFooter.fadeTo(1000, 1);
+                    // // Show footer's content
+                    // lFooter.fadeTo(1000, 1);
                 }, 150);
             }).triggerHandler('resize.cb.main');
         }

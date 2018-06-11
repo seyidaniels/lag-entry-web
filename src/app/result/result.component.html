@@ -1,22 +1,132 @@
-<div class="col-md-8 offset-md-2">
-    <div class="block block-themed">
-        <div class="block-header bg-danger">
-            <h3 class="block-title">Danger</h3>
-            <div class="block-options">
-                <button type="button" class="btn-block-option">
-                    <i class="si si-wrench"></i>
-                </button>
+<div class="row" *ngIf="!showAnswers">
+        <div class="col-md-6 col-lg-6 offset-lg-2 offset-md-2">
+                <div class="block">
+                        <div class="block-content block-content-full">
+                                
+                                <ngb-progressbar style="height: 100px;" type="warning" [value]="results['percentage']" [striped]="true" [animated]="true"><i>{{results['percentage']}}%</i></ngb-progressbar>
+
+                            <div class="py-20 text-center">
+                                <p class="lead">Your Score</p>
+                                <div class ="font-size-h2 font-w700 text-primary">{{results['score']}} </div>
+                                <div class="block-content">
+                                        <button class="btn btn-primary btn-large" (click)="showAnswers = !showAnswers" >See Answers</button>
+                                </div>
+                            </div>
+                        </div>     
+                </div>
+
+
+                <div class="block-content order-sm-12" >
+                        <div class="table-responsive" >
+                                <p class="lead">Your Result History</p>
+                                <div class="alert alert-info" *ngIf="noPastResults">
+                                    {{noPastResults}}
+                                </div>
+
+                            <table class="table table-striped table-vcenter" *ngIf="pastResults">
+                                
+                                <thead>
+                                    <tr>
+                                        <th style="width: 15%;">Index</th>
+                                        <th style="width: 30%;">Subject</th>
+                                        <th style="width: 15%;">Score</th>
+                                        <th class="text-center" style="width: 100px;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of pastResults; let i = index">
+                                        <td class="text-center">
+                                           {{i+1}}
+                                        </td>
+                                        <td class="font-w600">{{item.subject}}</td>
+                                        <td class="text-center">{{item.score}}</td>
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" (click) = "deleteResult(i)" ngbTooltip="Delete">
+                                                    <i class="fas fa-times danger"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+        </div>
+            
+        <div class="col-md-3 col-lg-3 order-sm-1">
+                            <a class="block block-rounded block-bordered block-link-shadow text-center" (click) = "save()"  href="javascript:void(0)">
+                                <div class="block-content">
+                                    <p class="mt-5">
+                                        <i class="fas fa-save fa-4x text-danger"></i>
+                                    </p>
+                                    <p class="font-w600">Save your Result</p>
+                                </div>
+                            </a> 
+                            
+                            <div class="block block-rounded block-bordered block-link-shadow">
+                                    <div class="block-content mt-3">
+                                            <div class="row items-push ">
+                                                    <div class="col-4">
+                                                        <a class="mb-5"><i class="fab fa-twitter fa-2x text-info"></i></a>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <a class="mb-5"><i class="fab fa-facebook fa-2x text-primary"></i></a>
+                                                    </div>
+                                                    <div class="col-4">
+                                                            <a class="mb-5"><i class="fab fa-whatsapp fa-2x text-success"></i></a>
+                                                    </div>
+                                            </div>
+                                    </div>
+                           </div>
+        </div>
+</div>
+
+<div class="row" *ngIf="showAnswers"  >
+    <div class="col-md-6 col-lg-6 offset-lg-2 offset-md-2">
+        <div class="block">
+            <div class="block-header text-center">
+                <div class="font-size-h4 font-w600 text-center">{{subject}}: {{questions.length}} Questions</div>
             </div>
         </div>
-        <div class="block-content">
-            <p>You scored {{results['score']}}</p> 
-            <button class="btn btn-primary">Save your Score</button>
-        </div>
-    </div>
-
-    <div class="block">
-            <div class="block-content">
-                    <button class="btn btn-primary">See Answers</button>
+        <div class="block" *ngFor="let question of questions; let i = index;"> 
+        <div class="block-content" >
+            <p class="lead font-weight-normal">{{question.question}}</p>
+            <hr>
+            <div class="row no-gutters items-push">
+                <div class="col-12">
+                    <label class="css-control css-control-lg css-control-primary css-checkbox">
+                      <p class="lead"> <span *ngIf="question.answer !== 'a'"><i class="fas fa-times text-danger"></i></span>  <span *ngIf="question.answer === 'a'"><i class="fas fa-check text-success"></i></span> {{question.optiona}}</p>
+                    </label>
                 </div>
-    </div>
+                <div class="col-12">
+                        <label class="css-control css-control-lg css-control-primary css-checkbox">
+                            <p class="lead"> <span *ngIf="question.answer !== 'b'"><i class="fas fa-times text-danger"></i></span>  <span *ngIf="question.answer === 'b'"><i class="fas fa-check text-success"></i></span> {{question.optionb}}</p>
+                        </label>
+                </div>
+                <div class="col-12 ">
+                            <label class="css-control css-control-lg css-control-primary css-checkbox">
+                                <p class="lead"> <span *ngIf="question.answer !== 'c'"><i class="fas fa-times text-danger"></i></span>  <span *ngIf="question.answer === 'c'"><i class="fas fa-check text-success"></i></span> {{question.optionc}}</p> 
+                            </label>
+                 </div>
+                <div class="col-12">
+                            <label class="css-control css-control-lg css-control-primary css-checkbox">
+                              <p class="lead">  <span *ngIf="question.answer !== 'd'"><i class="fas fa-times text-danger"></i></span>  <span *ngIf="question.answer === 'd'"><i class="fas fa-check text-success"></i></span> {{question.optiond}}</p>
+                            </label>
+                </div>
+            </div>
+        </div>
+        </div>
+</div>
+    
+<div class="col-md-3 col-lg-3 order-sm-1">
+                    <a class="block block-rounded block-bordered block-link-shadow text-center"  (click)="showAnswers = !showAnswers"  href="javascript:void(0)">
+                        <div class="block-content">
+                            <p class="mt-5">
+                                <i class="fas fa-arrow-left text-default"></i>
+                            </p>
+                            <p class="font-w600">See Result</p>
+                        </div>
+                    </a> 
+</div>
 </div>

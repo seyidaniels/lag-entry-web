@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
-import { Observable } from 'rxjs/Observable';
-
 
 @Component({
-  selector: 'app-result',
-  templateUrl: './result.component.html',
-  styleUrls: ['./result.component.css']
+  selector: 'app-mock-result',
+  templateUrl: './mock-result.component.html',
+  styleUrls: ['./mock-result.component.css']
 })
-export class ResultComponent implements OnInit {
+export class MockResultComponent implements OnInit {
+
   questions = [''];
   showAnswers = false;
+  userAnswers;
   errorAlert;
   results = {
   };
@@ -18,10 +18,6 @@ export class ResultComponent implements OnInit {
   noPastResults;
   lastData;
   subject;
-
-  scripts = [
-    'assets/js/pages/activity.js',
-  ];
   constructor(
     private appService: AppService
   ) { }
@@ -30,9 +26,16 @@ export class ResultComponent implements OnInit {
     // this.appService.loadScriptPage(this.scripts);
     this.results = this.appService.getResults();
     this.questions = this.results['questions'];
+    this.userAnswers = this.results['answers'];
     console.log(this.questions);
     this.subject = this.getSubjectName(this.questions[1]['type']);
     this.getPastResults();
+    // const pastResults = this.db.list('/results').valueChanges();
+    // pastResults.subscribe(
+    //   data => {
+    //     this.items = data;
+    //   }
+    // );
   }
 
   getSubjectName(subject) {
@@ -117,10 +120,4 @@ export class ResultComponent implements OnInit {
       }
     );
   }
-
-
-
-
-
-
 }

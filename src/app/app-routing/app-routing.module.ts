@@ -8,6 +8,7 @@ import {DashboardComponent} from '../dashboard/dashboard.component';
 import { TestComponent } from '../test/test.component';
 import { ProfileComponent } from '../profile/profile.component';
 import {ResultComponent} from '../result/result.component';
+import { MockResultComponent } from '../mock-result/mock-result.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'mock', component: MockComponent},
   {path: 'test/:subject/:number', component: TestComponent},
   {path: 'profile/:username', component: ProfileComponent},
-  {path: 'result/:randomGen', component: ResultComponent}
+  {path: 'result/:randomGen', component: ResultComponent},
+  {path: 'mock-result/:randomGen', component: MockResultComponent}
  ];
 
 @NgModule({

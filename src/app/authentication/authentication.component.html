@@ -1,0 +1,286 @@
+ 
+        <div id="page-container"  class="main-content-boxed" >
+            <!-- Main Container -->
+            <main id="main-container" >
+                <!-- Page Content -->
+                <div class="bg-gd-dusk">
+                    <div class="hero-static content content-full bg-white invisible" data-toggle="appear">
+                        <div *ngIf="!signup">
+                          <div *ngIf="!forgot">
+                                        <!-- Header -->
+                                    <div class="py-30 px-5 text-center">
+                                            <a class="link-effect font-w700" href="index.html">
+                                                <i class="si si-fire"></i>
+                                                <span class="font-size-xl text-primary-dark">code</span><span class="font-size-xl">base</span>
+                                            </a>
+                                            <h1 class="h2 font-w700 mt-50 mb-10">Welcome to Your Dashboard</h1>
+                                            <h2 class="h4 font-w400 text-muted mb-0">Please sign in</h2>
+                                    </div>
+                                        <!-- END Header -->
+                
+                                        <!-- Sign In Form -->
+                                        <div class="row justify-content-center px-5">
+                                            <div class="col-sm-8 col-md-6 col-xl-4">
+                                                <div class="alert alert-danger" *ngIf="signin_errors">
+                                                    {{signin_errors}}
+                                                </div>
+                                                <div class="alert alert-success" *ngIf="signin_success">
+                                                    {{signin_success}}
+                                                </div>
+                                                <form [formGroup] = "signInForm" (ngSubmit) = "submitSignIn(signInForm.value)" >
+
+                                                    <div class="form-group row">
+                                                        <div class="col-12">
+                                                            <div class="form-material ">
+                                                                <input type="text" class="form-control"  formControlName="username" >
+                                                                <label for="login-username">Username</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-danger text-center" *ngIf="signin_validation_errors">
+                                                            {{signin_validation_errors.username}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-12">
+                                                            <div class="form-material">
+                                                                <input type="password" class="form-control"  formControlName="password" >
+                                                                <label for="login-password">Password</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-danger text-center" *ngIf="signin_validation_errors">
+                                                            {{signin_validation_errors.password}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row gutters-tiny">
+                                                        <div class="col-12 mb-10">
+                                                            <button type="submit" class="btn btn-block btn-hero btn-noborder btn-rounded btn-alt-primary" id="signin_button">
+                                                                <i class="fas fa-sign-in-alt mr-10"></i> Sign In
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-sm-6 mb-5">
+                                                            <a class="btn btn-block btn-noborder btn-rounded btn-alt-secondary"  (click) = "signup = !signup" >
+                                                                <i class="fa fa-plus text-muted mr-5"></i> New Account
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-sm-6 mb-5">
+                                                            <a class="btn btn-block btn-noborder btn-rounded btn-alt-secondary" (click)= " forgot = ! forgot">
+                                                                <i class="fa fa-warning text-muted mr-5"></i> Forgot password
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- END Sign In Form -->
+                          </div>
+                          <div *ngIf="forgot">
+                                                        <!-- Header -->
+                    <div class="py-30 px-5 text-center">
+                            <a class="link-effect font-w700" href="index.html">
+                                <i class="si si-fire"></i>
+                                <span class="font-size-xl text-primary-dark">code</span><span class="font-size-xl">base</span>
+                            </a>
+                            <h1 class="h2 font-w700 mt-50 mb-10">Don’t worry, we’ve got your back</h1>
+                            <h2 class="h4 font-w400 text-muted mb-0">Please enter your username or email</h2>
+                        </div>
+                        <!-- END Header -->
+
+                        <!-- Reminder Form -->
+                        <div class="row justify-content-center px-5">
+                            <div class="col-sm-8 col-md-6 col-xl-4">
+                                <form class="js-validation-reminder" action="be_pages_auth_all.html" method="post">
+                                    <div class="form-group row">
+                                        <div class="col-12">
+                                            <div class="form-material floating">
+                                                <input type="text" class="form-control" id="reminder-credential" name="reminder-credential">
+                                                <label for="reminder-credential">Username or Email</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-block btn-hero btn-noborder btn-rounded btn-alt-primary">
+                                            <i class="fa fa-asterisk mr-10"></i> Password Reminder
+                                        </button>
+                                        <a class="btn btn-block btn-noborder btn-rounded btn-alt-secondary" (click) ="forgot = ! forgot" >
+                                            <i class="si si-login text-muted mr-10"></i> Sign In
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- END Reminder Form -->
+                          </div>
+                        </div>
+                        <div *ngIf="signup">
+                                <!-- Header -->
+                                <div class="py-30 px-5 text-center">
+                                        <a class="link-effect font-w700" href="index.html">
+                                            <i class="si si-fire"></i>
+                                            <span class="font-size-xl text-primary-dark">code</span><span class="font-size-xl">base</span>
+                                        </a>
+                                        <h1 class="h2 font-w700 mt-50 mb-10">Create New Account</h1>
+                                        <h2 class="h4 font-w400 text-muted mb-0">Please add your details</h2>
+                                </div>
+                                    <!-- END Header -->
+
+                                <!-- Sign Up Form -->
+                                <div class="row justify-content-center px-5">
+                                    <div class="col-sm-8 col-md-6 col-xl-4">
+                                        <div class="alert alert-danger" *ngIf="register_errors">
+                                                {{register_errors}}
+                                        </div>
+                                        <div class="alert alert-success" *ngIf="register_success">
+                                            {{register_success}}
+                                        </div>
+                                        <!-- jQuery Validation (.js-validation-signup class is initialized in js/pages/op_auth_signup.js) -->
+                                        <!-- For more examples you can check out https://github.com/jzaefferer/jquery-validation -->
+                                        <form [formGroup] = "signUpForm" (ngSubmit) = "submitSignUp(signUpForm.value)" >
+                                            <div class="form-group row">
+                                                        <div class="col-12">
+                                                            <div class="form-material ">
+                                                                <input type="text" required class="form-control" formControlName="fullname" >
+                                                                <label for="signup-fullname">Full Name</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-danger text-center" *ngIf="register_validation_errors">
+                                                        
+                                                            {{register_validation_errors.fullname}}
+                                                        </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <div class="form-material ">
+                                                        <input type="text" class="form-control" formControlName="username"  >
+                                                        <label for="signup-username">Username</label>
+                                                    </div>
+                                                </div>
+                                                <div class="text-danger text-center" *ngIf="register_validation_errors">
+                                                        
+                                                    {{register_validation_errors.username}}
+                                            </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <div class="form-material ">
+                                                        <input type="email" class="form-control" formControlName="email"  >
+                                                        <label for="signup-email">Email</label>
+                                                    </div>
+                                                </div>
+                                                <div class="text-danger text-center" *ngIf="register_validation_errors">
+                                                        
+                                                    {{register_validation_errors.email}}
+                                            </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <div class="form-material">
+                                                        <input type="password" class="form-control" formControlName="password" >
+                                                        <label for="signup-password">Password</label>
+                                                    </div>
+                                                </div>
+                                                <div class="text-danger text-center" *ngIf="register_validation_errors">
+                                                        
+                                                    {{register_validation_errors.password}}
+                                            </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <div class="form-material">
+                                                        <input type="password" class="form-control" formControlName="password_confirmation"  >
+                                                        <label for="signup-password-confirm">Password Confirmation</label>
+                                                    </div>
+                                                </div>
+                                                <div class="text-danger text-center" *ngIf="register_validation_errors">
+                                                        
+                                                    {{register_validation_errors.password_confirmation}}
+                                            </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                    <div class="col-12">
+                                                        <div class="form-material ">
+                                                            <input type="text" class="form-control" formControlName="course"  >
+                                                            <label for="signup-course">Course</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-danger text-center" *ngIf="register_validation_errors">
+                                                        
+                                                        {{register_validation_errors.course}}
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                    <div class="col-12">
+                                                        <div class="form-material ">
+                                                            <input type="number" class="form-control" formControlName="jambScore"  >
+                                                            <label for="signup-jambScore">JAMB Score</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-danger text-center" *ngIf="register_validation_errors">
+                                                        
+                                                            {{register_validation_errors.jambScore}}
+                                                    </div>
+                                            </div>
+                                            <div class="form-group row text-center">
+                                                <div class="col-12">
+                                                    <p class="small text-info">By Signing Up, You are agreeing to our terms and conditions</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row gutters-tiny">
+                                                <div class="col-12 mb-10">
+                                                    <button type="submit" id="registerBTN" class="btn btn-block btn-hero btn-noborder btn-rounded btn-alt-success">
+                                                        <i class="si si-user-follow mr-10"></i> Sign Up
+                                                    </button>
+                                                </div>
+                                                <div class="col-6">
+                                                    <a class="btn btn-block btn-noborder btn-rounded btn-alt-secondary" href="#" data-toggle="modal" data-target="#modal-terms">
+                                                        <i class="si si-book-open text-muted mr-10"></i> Read Terms
+                                                    </a>
+                                                </div>
+                                                <div class="col-6">
+                                                    <a class="btn btn-block btn-noborder btn-rounded btn-alt-secondary" (click)  = "signup = ! signup" >
+                                                        <i class="si si-login text-muted mr-10"></i> Sign In
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- END Sign Up Form -->
+                        </div>
+                    </div>
+                </div>
+                <!-- END Page Content -->
+            </main>
+            <!-- END Main Container -->
+    </div>
+
+
+
+           <!-- Terms Modal -->
+    <div class="modal fade" id="modal-terms" tabindex="-1" role="dialog" aria-labelledby="modal-terms" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-slidedown" role="document">
+            <div class="modal-content">
+                <div class="block block-themed block-transparent mb-0">
+                    <div class="block-header bg-primary-dark">
+                        <h3 class="block-title">Terms &amp; Conditions</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                <i class="si si-close"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <p>Potenti elit lectus augue eget iaculis vitae etiam, ullamcorper etiam bibendum ad feugiat magna accumsan dolor, nibh molestie cras hac ac ad massa, fusce ante convallis ante urna molestie vulputate bibendum tempus ante justo arcu erat accumsan adipiscing risus, libero condimentum venenatis sit nisl nisi ultricies sed, fames aliquet consectetur consequat nostra molestie neque nullam scelerisque neque commodo turpis quisque etiam egestas vulputate massa, curabitur tellus massa venenatis congue dolor enim integer luctus, nisi suscipit gravida fames quis vulputate nisi viverra luctus id leo dictum lorem, inceptos nibh orci.</p>
+                        <p>Potenti elit lectus augue eget iaculis vitae etiam, ullamcorper etiam bibendum ad feugiat magna accumsan dolor, nibh molestie cras hac ac ad massa, fusce ante convallis ante urna molestie vulputate bibendum tempus ante justo arcu erat accumsan adipiscing risus, libero condimentum venenatis sit nisl nisi ultricies sed, fames aliquet consectetur consequat nostra molestie neque nullam scelerisque neque commodo turpis quisque etiam egestas vulputate massa, curabitur tellus massa venenatis congue dolor enim integer luctus, nisi suscipit gravida fames quis vulputate nisi viverra luctus id leo dictum lorem, inceptos nibh orci.</p>
+                        <p>Potenti elit lectus augue eget iaculis vitae etiam, ullamcorper etiam bibendum ad feugiat magna accumsan dolor, nibh molestie cras hac ac ad massa, fusce ante convallis ante urna molestie vulputate bibendum tempus ante justo arcu erat accumsan adipiscing risus, libero condimentum venenatis sit nisl nisi ultricies sed, fames aliquet consectetur consequat nostra molestie neque nullam scelerisque neque commodo turpis quisque etiam egestas vulputate massa, curabitur tellus massa venenatis congue dolor enim integer luctus, nisi suscipit gravida fames quis vulputate nisi viverra luctus id leo dictum lorem, inceptos nibh orci.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-alt-success" data-dismiss="modal">
+                        <i class="fa fa-check"></i> Perfect
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Terms Modal -->

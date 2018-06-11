@@ -3,6 +3,10 @@ import {NgProgress} from 'ngx-progressbar';
 import {Http} from '@angular/http';
 import { AppService } from './app.service';
 import {Router} from '@angular/router';
+import { FormGroup, FormControl, Validators, FormBuilder }  from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AuthService } from './auth.service';
+
 
 @Component({
   selector: 'app-root',
@@ -12,8 +16,8 @@ import {Router} from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'app';
   posts;
-  loggedIn = true;
-
+  loggedIn;
+  userData;
 
 
   dashboardScripts = [
@@ -24,19 +28,25 @@ export class AppComponent implements OnInit {
   constructor(
     private progressService: NgProgress, private http: Http,
     private appService: AppService,
-    private router:  Router
+    private router:  Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
-    if (this.loggedIn) {
+    if (localStorage.getItem('token') !== null) {
+      this.loggedIn = true;
+      this.appService.getUserDetails().subscribe(
+        data => {
+          this.userData = data['user'];
+        }
+      );
       this.router.navigate(['dashboard']);
       this.loader();
       this.appService.loadScriptPage(this.dashboardScripts);
+      return;
     }
 
   }
-
-
 
   loader() {
      // This is a sample
@@ -54,6 +64,22 @@ export class AppComponent implements OnInit {
          this.posts = response.json();
        });
   // Sample shaa
+  }
+
+  doLogin(value) {
+    this.loggedIn = value;
+  }
+
+  signOut() {
+    this.authService.logout().subscribe(
+      data => {
+        if (data['message']) {
+          localStorage.clear();
+          this.loggedIn = false;
+          location.reload();
+        }
+      }
+    );
   }
 
 }

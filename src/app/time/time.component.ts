@@ -1,55 +1,50 @@
-import { Component, OnInit } from '@angular/core';
-
-
+import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
 @Component({
   selector: 'app-time',
   templateUrl: './time.component.html',
   styleUrls: ['./time.component.css']
 })
 export class TimeComponent implements OnInit {
+  timeElement: string;
+  timeElapsed: number;
 
-  constructor() { }
+  @Output() timeup = new EventEmitter<string>();
 
- minutes;
- seconds;
- dateObj = new Date();
- month = this.dateObj.getUTCMonth() + 1; //months from 1-12
-day = this.dateObj.getUTCDate();
-year = this.dateObj.getUTCFullYear();
+  constructor(
+  ) { }
+
+  @ViewChild('timer') timer;
 
   ngOnInit() {
-    this.countTime();
+    console.log(this.timer.nativeElement.classList);
+    this.timeElapsed = 1801;
+    const that = this;
+    setInterval(
+      function() { that.timerFunction(); },
+      1000
+    );
   }
 
-  countTime() {
-    const startDate = new Date(2018, 11, 25).getTime();
-    const endTime = new Date().getTime();
-    const distance = startDate - endTime;
-    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const s =  Math.floor((distance % (1000 * 60)) / 1000);
-    this.minutes = m;
-    this.seconds = s;
-    document.getElementById('minutes').textContent = ' ' + m;
-    document.getElementById('seconds').textContent = ' ' + s;
-    setInterval(this.countTime, 1000);
+  timerFunction(): void {
+    this.timeElapsed--;
+    if (this.timeElapsed <= 1200) {
+      this.timer.nativeElement.classList.add('bg-gd-sun');
+      this.timer.nativeElement.classList.remove('bg-corporate');
+    }
+    if (this.timeElapsed <= 600) {
+      this.timer.nativeElement.classList.remove('bg-gd-sun');
+      this.timer.nativeElement.classList.add('bg-danger');
+    }
+    if (this.timeElapsed <=  0) {
+      this.timeElement = 'Times Up';
+      this.timeup.emit(this.timeElement);
+      return;
+    }
+    const minutes = Math.floor(this.timeElapsed / 60);
+    const seconds = (this.timeElapsed % 60);
+    // minutes = (minutes < 10) ? ( '0' + minutes) : minutes;
+    // seconds = (seconds < 10) ? ( '0' + seconds) : seconds;
+    this.timeElement = minutes + ':' + seconds;
   }
-
-
-
-
-
-
-
-
-
-
-
-  // quizTime() {
-  // const date = new Date();
-  // const currentTime = date.getTime();
-  // const endTime = currentTime + 30 * 60000;
-  // return endTime - currentTime;
-  // }
-
 
 }

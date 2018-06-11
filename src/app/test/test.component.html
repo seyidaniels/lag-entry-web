@@ -1,6 +1,5 @@
-<div *ngIf="alert">
-        
-</div>
+
+<app-time></app-time>
 <div class="row" *ngIf="questions">
     <div class="col-md-4 mt-4">
             <div class="block">
@@ -10,7 +9,7 @@
                 <div class="block-content">
                     <div class="row">
                             <div class="btn-group mt-2 mr-2 ml-2" role="group" aria-label="Basic example" *ngFor="let no of questions; let i = index;">
-                                    <button type="button" (click) = "toQuestion(i)" [ngClass]="{active: userAnswer[i]}"  class="btn btn-secondary btn-xs">{{i+1}}</button>
+                                    <button type="button" (click) = "toQuestion(i)" [ngClass]="{active: userAnswer[i]}"  class="btn btn-secondary btn-xs"><p *ngIf="i < 9">0{{i+1}}</p><p *ngIf="i >= 10">{{i+1}}</p> <p *ngIf="i == 9">{{i+1}}</p></button>
                             </div>
                     </div>
                 </div>
@@ -18,7 +17,11 @@
     </div>
 <div class="col-md-7 mt-4 " *ngIf="questions" >                                   
         <div class="block" >
+                <div>
+                        <ngb-alert *ngIf="successMessage" type="info" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                </div>
             <div class="block-header block-header-default">
+                   
                 <h3 class="block-title lead">{{getSubjectName()}}: Question Number {{i+1}}</h3>
                 <div class="block-options">
                     <button class="btn btn-md btn-alt-primary" (click)="submit()" >
@@ -68,7 +71,7 @@
                 </div>
             </div>
         </div>
-    </div> 
+ </div> 
 </div>
 
 
