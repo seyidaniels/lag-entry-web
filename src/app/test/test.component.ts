@@ -4,6 +4,7 @@ import { AppService } from '../app.service';
 import {NgProgress} from 'ngx-progressbar';
 import {Subject} from 'rxjs/Subject';
 import {debounceTime} from 'rxjs/operators';
+import {ExamObject} from '../exam/examobject';
 
 declare var $;
 @Component({
@@ -12,13 +13,6 @@ declare var $;
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
-
-  constructor(
-    private route: ActivatedRoute,
-    private appService: AppService,
-    private progressService: NgProgress,
-    private router: Router
-  ) { }
   staticAlertClosed = false;
   value = 'danger';
   name = 'Seyi Daniels';
@@ -27,17 +21,18 @@ export class TestComponent implements OnInit {
   i = 0;
   successMessage;
   correctAnswers: any;
-
   questions = [''];
-
   private _success = new Subject<string>();
-
   userAnswer = new Array(this.questions.length);
-
-
-//   addMinutes(date, minutes) {
-//     return new Date(date.getTime() + minutes * 60000);
-// }
+  exam: ExamObject;
+  constructor(
+    private route: ActivatedRoute,
+    private appService: AppService,
+    private progressService: NgProgress,
+    private router: Router
+  ) {
+    this.exam = new ExamObject(this.questions, this.userAnswer, this.subject, this.i, this.appService, this.router);
+  }
 
   ngOnInit() {
     setTimeout(() => this.staticAlertClosed = true, 20000);
@@ -54,7 +49,11 @@ export class TestComponent implements OnInit {
               setTimeout(() => {
                 this.progressService.inc(0.2);
               }, 500);
-         return this.appService.getQuestions(this.subject, this.number);
+              if (this.subject !== 'all' && this.number !== 30) {
+                return this.appService.getQuestions(this.subject, this.number);
+              } else {
+                return this.appService.getAllComb();
+              }
         }
       }
     ).subscribe(
@@ -96,18 +95,12 @@ previous(i) {
   }
     this._success.next(`This is the first question `);
 }
-
 toQuestion (i) {
   this.i = i;
 }
-
-
-
 submit() {
   $('#modal-slideup').modal('show');
 }
-
-
 makeid() {
   let text = '';
  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -117,33 +110,31 @@ makeid() {
   return text;
 }
 
+getSubjectName() {
+  let subject;
+  switch (this.subject) {
+    case 'MAT' : subject = 'Mathematics';
+    break;
+    case 'ENG': subject =  'English Language';
+    break;
+    case 'GEN': subject =  'General Paper';
+    break;
+    case 'all': subject =  'All Subjects';
+    break;
+    default: subject =  null;
+  }
+  return subject;
+}
 confirmSubmit() {
   const randomGen = this.makeid();
-  const dateSubmitted = new Date().getDate();
   const score = this.calculate();
   const percentage = (score / this.number) * 100;
   this.appService.saveAnswerResult(this.questions, this.userAnswer, score, this.getSubjectName(), randomGen, percentage);
   this.router.navigate(['result', randomGen]);
 }
-
-
-
 reset() {
   alert('Are your sure you wanna reset?');
   this.userAnswer = [];
   this.i = 0;
-}
-
-
-getSubjectName() {
-  if (this.subject === 'MAT') {
-    return 'Mathematics';
-  }
-  if (this.subject === 'ENG') {
-    return 'English Language';
-  }
-  if (this.subject === 'GEN') {
-    return 'General Paper';
-  }
 }
 }

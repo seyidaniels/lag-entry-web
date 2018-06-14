@@ -3,8 +3,6 @@ import {NgProgress} from 'ngx-progressbar';
 import {Http} from '@angular/http';
 import { AppService } from './app.service';
 import {Router} from '@angular/router';
-import { FormGroup, FormControl, Validators, FormBuilder }  from '@angular/forms';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AuthService } from './auth.service';
 
 
@@ -18,6 +16,7 @@ export class AppComponent implements OnInit {
   posts;
   loggedIn;
   userData;
+  username;
 
 
   dashboardScripts = [
@@ -38,6 +37,8 @@ export class AppComponent implements OnInit {
       this.appService.getUserDetails().subscribe(
         data => {
           this.userData = data['user'];
+          this.username = this.userData['username'];
+          localStorage.setItem('user', JSON.stringify(this.userData));
         }
       );
       this.router.navigate(['dashboard']);
@@ -74,7 +75,8 @@ export class AppComponent implements OnInit {
     this.authService.logout().subscribe(
       data => {
         if (data['message']) {
-          localStorage.clear();
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
           this.loggedIn = false;
           location.reload();
         }

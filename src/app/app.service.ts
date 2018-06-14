@@ -3,7 +3,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { catchError, map, tap } from 'rxjs/operators';
 import {  of } from 'rxjs/observable/of';
+import {Router} from '@angular/router';
 const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
 
 @Injectable()
 export class AppService {
@@ -19,7 +21,8 @@ export class AppService {
   };
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   getUserDetails() {
@@ -36,6 +39,14 @@ export class AppService {
       number: number
     };
     return this.http.post('http://localhost:8000/api/get-questions?token=' + token, body, {headers: headers})
+      .pipe(
+        catchError(this.handleError('getQuotes', []))
+      );
+  }
+
+  getAllComb() {
+    const token = this.getToken();
+    return this.http.get('http://localhost:8000/api/test-all?token=' + token)
       .pipe(
         catchError(this.handleError('getQuotes', []))
       );
@@ -93,7 +104,13 @@ export class AppService {
       if (error['status'] === 401) {
         localStorage.removeItem('token');
         location.reload();
+        return;
       }
+      if (error['status'] ===  500) {
+        this.router.navigate(['server-error']);
+        return;
+      }
+
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };

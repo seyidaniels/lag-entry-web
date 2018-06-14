@@ -1,0 +1,191 @@
+
+
+<div class="content content-full">
+    <form [formGroup]="aggregateForm"  (ngSubmit)="calculateAggregate(aggregateForm.value)">
+        <div class="row justify-content-center ">
+            <div class="col-lg-8 col-xl-6">
+              <div class="block">
+                  <div class="block-header block-header-default">
+                      <h3 class="block-title">Jamb Score </h3> <span class="small text-danger">50 % of your total aggregate</span>
+                  </div>
+                  <div class="block-content">
+                      <div class="form-group row">
+                          <div class="col-12">
+                              <input type="number" formControlName="jamb_score"  class="form-control form-control-lg">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+        <div class="row justify-content-center ">
+            <div class="col-lg-8 col-xl-6">
+              <div class="block">
+                  <div class="block-header block-header-default">
+                      <h3 class="block-title">Post-UTME Score</h3> <span class="small text-danger">30% of your total aggregate</span>
+                  </div>
+                  <div class="block-content">
+                      <div class="form-group row">
+                          <div class="col-12">
+                              <input type="number" formControlName="postutme_score" class="form-control form-control-lg">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+      <div class="row justify-content-center">
+          <div class="col-lg-8 col-xl-6">
+            <div class="block">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">O'Level Grade </h3> <span class="small text-danger">20 % of your total aggregate</span>
+                    <div class="block-options" *ngIf="waec_result">
+                        <button type="button" (click) ="waec_result = !waec_result" class="btn-block-option js-tooltip-enabled" data-toggle="tooltip" title="Click to edit your WAEC Result" data-original-title="Edit">
+                            <i class="si si-pencil"></i>
+                        </button>
+                    </div>
+                  </div>
+                <div class="block-content">
+                    <div *ngIf="!waec_result">
+                                    <div class="form-group row alert alert-danger" *ngIf="waec_error">
+                                            <div class="col-md-9">
+                                                {{waec_error}}
+                                            </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <div class="form-material floating open">
+                                                <select class="form-control" id="material-select2" name="material-select2" formControlName="maths">
+                                                    <option></option><!-- Empty value for demostrating material select box -->
+                                                    <option value="4">A1</option>
+                                                    <option value="3.6">B2</option>
+                                                    <option value="3.2">B3</option>
+                                                    <option value="2.8">C4</option>
+                                                    <option value="2.4">C5</option>
+                                                    <option value="2.0">C6</option>
+                
+                                                </select>
+                                                <label for="material-select2">Mathematics</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-material floating open">
+                                                <select class="form-control" id="material-select2" name="material-select2" formControlName="english">
+                                                    <option></option><!-- Empty value for demostrating material select box -->
+                                                    <option value="4">A1</option>
+                                                    <option value="3.6">B2</option>
+                                                    <option value="3.2">B3</option>
+                                                    <option value="2.8">C4</option>
+                                                    <option value="2.4">C5</option>
+                                                    <option value="2.0">C6</option>
+                
+                                                </select>
+                                                <label for="material-select2">English Language</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-material floating open">
+                                                <select class="form-control" id="material-select2" name="material-select2" formControlName="first_required">
+                                                    <option></option><!-- Empty value for demostrating material select box -->
+                                                    <option value="4">A1</option>
+                                                    <option value="3.6">B2</option>
+                                                    <option value="3.2">B3</option>
+                                                    <option value="2.8">C4</option>
+                                                    <option value="2.4">C5</option>
+                                                    <option value="2.0">C6</option>
+                
+                                                </select>
+                                                <label for="material-select2">First Required Subject</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-material floating open">
+                                                <select class="form-control" id="material-select2" name="material-select2" formControlName="second_required"> 
+                                                    <option></option><!-- Empty value for demostrating material select box -->
+                                                    <option value="4">A1</option>
+                                                    <option value="3.6">B2</option>
+                                                    <option value="3.2">B3</option>
+                                                    <option value="2.8">C4</option>
+                                                    <option value="2.4">C5</option>
+                                                    <option value="2.0">C6</option>
+                                                </select>
+                                                <label for="material-select2">Second Required Subject</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-material floating open">
+                                                <select class="form-control" id="material-select2" name="material-select2" formControlName="third_required">
+                                                    <option></option><!-- Empty value for demostrating material select box -->
+                                                    <option value="4">A1</option>
+                                                    <option value="3.6">B2</option>
+                                                    <option value="3.2">B3</option>
+                                                    <option value="2.8">C4</option>
+                                                    <option value="2.4">C5</option>
+                                                    <option value="2.0">C6</option>
+                
+                                                </select>
+                                                <label for="material-select2">Third Required Subject</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                    </div>
+                    <div class="table-responsive" *ngIf="waec_result" >
+                        <p class="text-center text-info">Your Saved WAEC result</p>
+                        <table class="table table-hover table-striped  table-vcenter">
+                            <thead>
+                                <tr>
+                                    <th>S/N</th>
+                                    <th style="width: 50%;">Subject</th>
+                                    <th  style="width: 30%;">Grade</th>
+                                    <th  style="width: 30%;">Point</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr  *ngFor="let result of waec_result; let i = index">
+                                        <td>{{i+1}}</td>
+                                        <td class="font-w600 ">{{subjects[i]}}</td>
+                                        <div [ngSwitch] ="result">
+                                                <td *ngSwitchCase="4">
+                                                    A1
+                                                </td>
+                                                <td *ngSwitchCase="3.6">
+                                                    B2
+                                                </td>
+                                                <td *ngSwitchCase="3.2">
+                                                    B3
+                                                </td>
+                                                <td *ngSwitchCase="2.8">
+                                                    C4
+                                                </td>
+                                                <td *ngSwitchCase="2.4">
+                                                    C5
+                                                </td>
+                                                <td *ngSwitchCase="2.0">
+                                                    C6
+                                                </td>
+                                        </div>
+                                        <td>{{result}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                                <p class="lead text-success"> Total WAEC Result: {{waec_sum}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+      </div>
+      <div class="row justify-content-center ">
+          <div class="col-lg-8 col-xl-6">
+                <div class="form-group row">
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-hero btn-alt-primary min-width-175">
+                            <i class="fas fa-calculator mr-5"></i> Calculate Aggregate
+                        </button>
+                    </div>
+            </div>
+          </div>
+      </div>
+  </form>
+</div>

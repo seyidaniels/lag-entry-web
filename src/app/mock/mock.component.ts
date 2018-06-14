@@ -28,9 +28,6 @@ export class MockComponent implements OnInit {
    this.appService.getMockQuestions().subscribe(
     data => {
       this.questions = data['questions'];
-    },
-    error => {
-      console.log(error);
     }
   );
   this.timeUp(this.timeup);
@@ -62,7 +59,7 @@ confirmSubmit() {
   const dateSubmitted = new Date().getDate();
   const score = this.calculate();
   const percentage = (score / 50) * 100;
-  this.appService.saveAnswerResult(this.questions, this.userAnswer, score, 'Mock Examination', randomGen, percentage);
+  this.appService.saveAnswerResult(this.questions, this.userAnswer, score, 'mock', randomGen, percentage);
   this.router.navigate(['mock-result', randomGen]);
 }
 

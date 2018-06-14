@@ -34,7 +34,7 @@
         </a>
     </div>
     <div class="col-6 col-xl-3">
-        <a class="block block-link-rotate block-transparent text-right bg-primary-lighter" href="javascript:void(0)" (click)="startQuiz(3)">
+        <a class="block block-link-rotate block-transparent text-right bg-primary-lighter" href="javascript:void(0)" (click)="startAllQuiz()">
             <div class="block-content block-content-full clearfix">
                 <div class="float-left mt-10 d-none d-sm-block">
                     <i class="si si-users fa-3x text-primary"></i>
@@ -52,7 +52,7 @@
         <div class="block block-themed block-mode-loading-refresh">
             <div class="block-header bg-primary">
                 <h3 class="block-title">
-                    Sales <small>This week</small>
+                    Your Performance <small>This week</small>
                 </h3>
                 <div class="block-options">
                     <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
@@ -108,93 +108,101 @@
                 </div>
             </div>
             <div class="block-content">
-                <form [formGroup]="olevelForm" *ngIf="!waec_result" (ngSubmit)="submitolevelForm(olevelForm.value)">
-                    <div class="form-group row">
-                        <div class="col-md-12">
-                            <div class="form-material floating open">
-                                <select class="form-control" id="material-select2" name="material-select2" formControlName="maths">
-                                    <option></option><!-- Empty value for demostrating material select box -->
-                                    <option value="4">A1</option>
-                                    <option value="3.6">B2</option>
-                                    <option value="3.2">B3</option>
-                                    <option value="2.8">C4</option>
-                                    <option value="2.4">C5</option>
-                                    <option value="2.0">C6</option>
+                <div *ngIf="!waec_result">
+                        <form [formGroup]="olevelForm"  (ngSubmit)="submitolevelForm(olevelForm.value)">
+                                <div class="form-group row alert alert-danger" *ngIf="waec_error">
+                                        <div class="col-md-9">
+                                            {{waec_error}}
+                                        </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="form-material floating open">
+                                            <select class="form-control" id="material-select2" name="material-select2" formControlName="maths">
+                                                <option></option><!-- Empty value for demostrating material select box -->
+                                                <option value="4">A1</option>
+                                                <option value="3.6">B2</option>
+                                                <option value="3.2">B3</option>
+                                                <option value="2.8">C4</option>
+                                                <option value="2.4">C5</option>
+                                                <option value="2.0">C6</option>
+            
+                                            </select>
+                                            <label for="material-select2">Mathematics</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-material floating open">
+                                            <select class="form-control" id="material-select2" name="material-select2" formControlName="english">
+                                                <option></option><!-- Empty value for demostrating material select box -->
+                                                <option value="4">A1</option>
+                                                <option value="3.6">B2</option>
+                                                <option value="3.2">B3</option>
+                                                <option value="2.8">C4</option>
+                                                <option value="2.4">C5</option>
+                                                <option value="2.0">C6</option>
+            
+                                            </select>
+                                            <label for="material-select2">English Language</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-material floating open">
+                                            <select class="form-control" id="material-select2" name="material-select2" formControlName="first_required">
+                                                <option></option><!-- Empty value for demostrating material select box -->
+                                                <option value="4">A1</option>
+                                                <option value="3.6">B2</option>
+                                                <option value="3.2">B3</option>
+                                                <option value="2.8">C4</option>
+                                                <option value="2.4">C5</option>
+                                                <option value="2.0">C6</option>
+            
+                                            </select>
+                                            <label for="material-select2">First Required Subject</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-material floating open">
+                                            <select class="form-control" id="material-select2" name="material-select2" formControlName="second_required"> 
+                                                <option></option><!-- Empty value for demostrating material select box -->
+                                                <option value="4">A1</option>
+                                                <option value="3.6">B2</option>
+                                                <option value="3.2">B3</option>
+                                                <option value="2.8">C4</option>
+                                                <option value="2.4">C5</option>
+                                                <option value="2.0">C6</option>
+            
+                                            </select>
+                                            <label for="material-select2">Second Required Subject</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-material floating open">
+                                            <select class="form-control" id="material-select2" name="material-select2" formControlName="third_required">
+                                                <option></option><!-- Empty value for demostrating material select box -->
+                                                <option value="4">A1</option>
+                                                <option value="3.6">B2</option>
+                                                <option value="3.2">B3</option>
+                                                <option value="2.8">C4</option>
+                                                <option value="2.4">C5</option>
+                                                <option value="2.0">C6</option>
+            
+                                            </select>
+                                            <label for="material-select2">Third Required Subject</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-9">
+                                        <button type="submit" class="btn btn-alt-primary btn-lg">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                </div>
 
-                                </select>
-                                <label for="material-select2">Mathematics</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-material floating open">
-                                <select class="form-control" id="material-select2" name="material-select2" formControlName="english">
-                                    <option></option><!-- Empty value for demostrating material select box -->
-                                    <option value="4">A1</option>
-                                    <option value="3.6">B2</option>
-                                    <option value="3.2">B3</option>
-                                    <option value="2.8">C4</option>
-                                    <option value="2.4">C5</option>
-                                    <option value="2.0">C6</option>
-
-                                </select>
-                                <label for="material-select2">English Language</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-material floating open">
-                                <select class="form-control" id="material-select2" name="material-select2" formControlName="first_required">
-                                    <option></option><!-- Empty value for demostrating material select box -->
-                                    <option value="4">A1</option>
-                                    <option value="3.6">B2</option>
-                                    <option value="3.2">B3</option>
-                                    <option value="2.8">C4</option>
-                                    <option value="2.4">C5</option>
-                                    <option value="2.0">C6</option>
-
-                                </select>
-                                <label for="material-select2">First Required Subject</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-material floating open">
-                                <select class="form-control" id="material-select2" name="material-select2" formControlName="second_required"> 
-                                    <option></option><!-- Empty value for demostrating material select box -->
-                                    <option value="4">A1</option>
-                                    <option value="3.6">B2</option>
-                                    <option value="3.2">B3</option>
-                                    <option value="2.8">C4</option>
-                                    <option value="2.4">C5</option>
-                                    <option value="2.0">C6</option>
-
-                                </select>
-                                <label for="material-select2">Second Required Subject</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-material floating open">
-                                <select class="form-control" id="material-select2" name="material-select2" formControlName="third_required">
-                                    <option></option><!-- Empty value for demostrating material select box -->
-                                    <option value="4">A1</option>
-                                    <option value="3.6">B2</option>
-                                    <option value="3.2">B3</option>
-                                    <option value="2.8">C4</option>
-                                    <option value="2.4">C5</option>
-                                    <option value="2.0">C6</option>
-
-                                </select>
-                                <label for="material-select2">Third Required Subject</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-md-9">
-                            <button type="submit" class="btn btn-alt-primary btn-lg">Submit</button>
-                        </div>
-                    </div>
-                </form>
                 <div class="table-responsive" *ngIf="waec_result" >
                     <p class="text-center text-info">Your Saved WAEC result</p>
-                    <table class="table table-hover table-striped table-sm table-vcenter">
+                    <table class="table table-hover table-striped  table-vcenter">
                         <thead>
                             <tr>
                                 <th>S/N</th>
@@ -246,6 +254,9 @@
     <!-- END Row #2 -->
 </div>
 
+
+
+
 <!--  Modals -->
 <div class="modal fade" id="modal-fadein" tabindex="-1" role="dialog" aria-labelledby="modal-small" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-sm" role="document">
@@ -267,16 +278,6 @@
                             </div>
                         </div>
                     </form>
-
-
-
-
-
-
-
-
-
-
                 </div>
             </div>
             <div class="modal-footer">
@@ -288,7 +289,3 @@
         </div>
     </div>
 </div>
-
-
-
-x

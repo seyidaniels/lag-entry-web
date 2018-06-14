@@ -75,7 +75,6 @@ export class AuthenticationComponent implements OnInit {
       data => {
         if (data['validation_errors']) {
           this.register_validation_errors = data['validation_errors'];
-          console.log(this.register_validation_errors);
           submitBTN.disabled = false;
           submitBTN.innerHTML = '<i class="si si-user-follow mr-10"></i> Sign Up';
           return;

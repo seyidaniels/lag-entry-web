@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-mock-result',
@@ -18,36 +19,19 @@ export class MockResultComponent implements OnInit {
   noPastResults;
   lastData;
   subject;
+  resultScripts = [
+    'assets/js/pages/html2canvas.min.js',
+  ];
   constructor(
     private appService: AppService
   ) { }
 
   ngOnInit() {
-    // this.appService.loadScriptPage(this.scripts);
     this.results = this.appService.getResults();
     this.questions = this.results['questions'];
     this.userAnswers = this.results['answers'];
-    console.log(this.questions);
-    this.subject = this.getSubjectName(this.questions[1]['type']);
     this.getPastResults();
-    // const pastResults = this.db.list('/results').valueChanges();
-    // pastResults.subscribe(
-    //   data => {
-    //     this.items = data;
-    //   }
-    // );
-  }
-
-  getSubjectName(subject) {
-    if (subject === 'MAT') {
-      return 'Mathematics';
-    }
-    if (subject === 'ENG') {
-      return 'English Language';
-    }
-    if (subject === 'GEN') {
-      return 'General Paper';
-    }
+    this.appService.loadScriptPage(this.resultScripts);
   }
 
   save() {
@@ -91,7 +75,6 @@ export class MockResultComponent implements OnInit {
   getPastResults() {
     this.appService.getPastResults().subscribe(
       data => {
-        console.log(data['results'].length);
         if (data['results'].length > 0) {
           this.pastResults = data['results'];
           return;
@@ -103,21 +86,11 @@ export class MockResultComponent implements OnInit {
     );
   }
 
-  deleteResult(index) {
-    const questionId = this.pastResults[index]['uniqueKey'];
-    this.appService.deleteResult(questionId).subscribe(
-      data => {
-        if (data['success']) {
-          this.pastResults.splice(index, 1);
-          if (this.pastResults.length === 0) {
-            this.noPastResults = 'You dont have saved result yet!';
-          }
-        return;
-        }
-        if (data['error']) {
-          console.log(data['error']);
-        }
-      }
-    );
+  share() {
+    console.log('fhfhf');
+    html2canvas(document.body).then(function() {
+     console.log('donre');
+  });
   }
+
 }

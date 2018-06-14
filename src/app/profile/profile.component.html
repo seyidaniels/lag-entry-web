@@ -1,3 +1,226 @@
-<p>
-  profile works!
-</p>
+<div class="bg-image bg-image-bottom" style="background-image: url('assets/img/photos/photo13@2x.jpg');">
+  <div class="bg-primary-dark-op py-30">
+      <div class="content content-full text-center">
+          <!-- Avatar -->
+          <div class="mb-15">
+              <a class="img-link">
+                  <img class="img-avatar img-avatar96 img-avatar-thumb" src="assets/img/avatars/avatar15.jpg" alt="">
+              </a>
+              <div class="form-group row mt-10">
+                <label class="col-12 text-info" for="example-file-input">Change Display Picture</label>
+                <div class="col-12">
+                    <input type="file" id="example-file-input" name="example-file-input">
+                </div>
+                </div>
+          </div>
+          <!-- END Avatar -->
+
+          <!-- Personal -->
+          <h1 class="h3 text-white font-w700 mb-10 mt-15">{{userData['fullname']}}</h1>
+          <h2 class="h5 text-white-op">
+              Applying for  <a class="text-primary-light" href="javascript:void(0)">{{userData['course']}}</a>
+          </h2>
+          <!-- END Personal -->
+
+          <!-- Actions -->
+          <button type="button" class="btn btn-rounded btn-hero btn-sm btn-alt-success mb-5" (click) ="clickEditProfile()">
+              <i class="far fa-edit mr-5"></i> Edit Profile
+          </button>
+          <button type="button" class="btn btn-rounded btn-hero btn-sm btn-alt-primary mb-5"  (click) ="clickChangePword()">
+              <i class="fas fa-key mr-5"></i> Change your Password
+          </button>
+          <!-- END Actions -->
+      </div>
+  </div>
+</div>
+
+<div class="row gutters-tiny mt-20 justify-content-center" *ngIf="stats">
+    <div class="col-6 col-md-4 col-xl-2">
+        <a class="block block-transparent text-center bg-primary" href="javascript:void(0)">
+            <div class="block-content">
+                <p class="font-size-h1 text-white">
+                    <strong>$499</strong>
+                </p>
+                <p class="font-w600 text-white-op">Earnings</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-6 col-md-4 col-xl-2">
+        <a class="block block-transparent text-center bg-success" href="javascript:void(0)">
+            <div class="block-content">
+                <p class="font-size-h1 text-white">
+                    <strong>10</strong>
+                </p>
+                <p class="font-w600 text-white-op">
+                    <i class="fa fa-envelope mr-5"></i> Messages
+                </p>
+            </div>
+        </a>
+    </div>
+    <div class="col-6 col-md-4 col-xl-2">
+        <a class="block block-transparent text-center bg-gd-sun" href="javascript:void(0)">
+            <div class="block-content">
+                <p class="font-size-h1 text-white">
+                    <strong>3</strong>
+                </p>
+                <p class="font-w600 text-white-op">
+                    <i class="fa fa-shopping-cart mr-5"></i> Products
+                </p>
+            </div>
+        </a>
+    </div>
+    <div class="col-6 col-md-4 col-xl-2">
+        <a class="block block-transparent text-center bg-corporate" href="javascript:void(0)">
+            <div class="block-content">
+                <p class="font-size-h1 text-white">
+                    <strong>98.25</strong>
+                </p>
+                <p class="font-w600 text-white-op">
+                    <i class="fa fa-line-chart mr-5"></i> Sales/Week
+                </p>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div *ngIf ="editProfile" class="mt-20">
+       <!-- Sign Up Form -->
+       <div class="row justify-content-center px-5 mt-20">
+            <div class="col-sm-8 col-md-6 col-xl-4">
+                <div class="alert alert-danger" *ngIf="update_errors">
+                        {{update_errors}}
+                </div>
+                <div class="alert alert-success" *ngIf="update_success">
+                    {{update_success}}
+                </div>
+                <form [formGroup] = "updateForm" (ngSubmit) = "submitupdate(updateForm.value)" >
+                    <div class="form-group row">
+                                <div class="col-12">
+                                    <div class="form-material ">
+                                        <input type="text" required class="form-control" formControlName="fullname" >
+                                        <label for="signup-fullname">Full Name</label>
+                                    </div>
+                                </div>
+                                <div class="text-danger text-center" *ngIf="update_validation_errors">
+                                
+                                    {{update_validation_errors.fullname}}
+                                </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <div class="form-material ">
+                                <input type="text" class="form-control" formControlName="username"  >
+                                <label for="signup-username">Username</label>
+                            </div>
+                        </div>
+                        <div class="text-danger text-center" *ngIf="update_validation_errors">  
+                            {{update_validation_errors.username}}
+                    </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <div class="form-material ">
+                                <input type="email" class="form-control" formControlName="email"  >
+                                <label for="signup-email">Email</label>
+                            </div>
+                        </div>
+                        <div class="text-danger text-center" *ngIf="update_validation_errors">    
+                            {{update_validation_errors.email}}
+                    </div>
+                    </div>
+                    <div class="form-group row">
+                            <div class="col-12">
+                                <div class="form-material ">
+                                    <input type="text" class="form-control" formControlName="course"  >
+                                    <label for="signup-course">Course</label>
+                                </div>
+                            </div>
+                            <div class="text-danger text-center" *ngIf="update_validation_errors">
+                                
+                                {{update_validation_errors.course}}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                            <div class="col-12">
+                                <div class="form-material ">
+                                    <input type="number" class="form-control" formControlName="jambScore"  >
+                                    <label for="signup-jambScore">JAMB Score</label>
+                                </div>
+                            </div>
+                            <div class="text-danger text-center" *ngIf="update_validation_errors">
+                                
+                                    {{update_validation_errors.jambScore}}
+                            </div>
+                    </div>
+                    <div class="form-group row gutters-tiny">
+                        <div class="col-12 mb-10">
+                            <button type="submit" id="updateBTN" class="btn btn-block btn-hero btn-noborder btn-rounded btn-alt-success">
+                                <i class="si si-user-follow mr-10"></i> Update Profile
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- END Sign Up Form -->
+</div>
+<div *ngIf="changePword">
+    Change Pword Clicked;
+        <!-- Sign Up Form -->
+        <!-- <div class="row justify-content-center px-5 mt-20">
+             <div class="col-sm-8 col-md-6 col-xl-4">
+                 <div class="alert alert-danger" *ngIf="update_errors">
+                         {{update_errors}}
+                 </div>
+                 <div class="alert alert-success" *ngIf="update_success">
+                     {{update_success}}
+                 </div>
+                 <form [formGroup] = "signUpForm" (ngSubmit) = "submitSignUp(signUpForm.value)" >
+                     <div class="form-group row">
+                                 <div class="col-12">
+                                     <div class="form-material ">
+                                         <input type="passwword" required class="form-control" formControlName="fullname" >
+                                         <label for="signup-fullname">Current Password</label>
+                                     </div>
+                                 </div>
+                                 <div class="text-danger text-center" *ngIf="update_validation_errors">
+                                 
+                                     {{update_validation_errors.fullname}}
+                                 </div>
+                     </div>
+                     <div class="form-group row">
+                         <div class="col-12">
+                             <div class="form-material">
+                                 <input type="password" class="form-control" formControlName="password" >
+                                 <label for="signup-password">Password</label>
+                             </div>
+                         </div>
+                         <div class="text-danger text-center" *ngIf="update_validation_errors">
+                                 
+                             {{update_validation_errors.password}}
+                     </div>
+                     </div>
+                     <div class="form-group row">
+                         <div class="col-12">
+                             <div class="form-material">
+                                 <input type="password" class="form-control" formControlName="password_confirmation"  >
+                                 <label for="signup-password-confirm">Password Confirmation</label>
+                             </div>
+                         </div>
+                         <div class="text-danger text-center" *ngIf="update_validation_errors">
+                                 
+                             {{update_validation_errors.password_confirmation}}
+                     </div>
+                     </div>
+                     <div class="form-group row gutters-tiny">
+                         <div class="col-12 mb-10">
+                             <button type="submit" id="updateBTN" class="btn btn-block btn-hero btn-noborder btn-rounded btn-alt-success">
+                                 <i class="si si-user-follow mr-10"></i> Update Profile
+                             </button>
+                         </div>
+                     </div>
+                 </form>
+             </div>
+         </div> -->
+         <!-- END Sign Up Form -->
+ </div>

@@ -3,7 +3,7 @@
         [positionUsing]="'marginLeft'"
         [direction]="'leftToRightIncreased'"
         [color]="'#4286f4'"
-        [trickleSpeed]="500" 
+        [trickleSpeed]="500"
         [thick]="true" 
         [ease]="'easeInSine'"
     ></ng-progress>
@@ -20,7 +20,7 @@
                                     <!-- Close Sidebar, Visible only on mobile screens -->
                                     <!-- Layout API, functionality initialized in Codebase() -> uiApiLayout() -->
                                     <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none align-v-r" data-toggle="layout" data-action="sidebar_close">
-                                        <i class="fa fa-times text-danger"></i>
+                                        <i class="fas fa-times text-danger"></i>
                                     </button>
                                     <!-- END Close Sidebar -->
     
@@ -45,16 +45,16 @@
                                 -->
                                 <ul class="nav-main">
                                     <li>
-                                        <a class="active" href="bd_dashboard.html"><i class="si si-compass"></i>Dashboard</a>
+                                        <a class="active" href="/"><i class="si si-compass"></i>Dashboard</a>
                                     </li>
                                     <li>
-                                        <a  href="Mock"><i class="si si-compass"></i>Mock</a>
+                                        <a  routerLink="/mock"><i class="si si-compass"></i>Mock</a>
                                     </li>
                                     <li>
-                                        <a  href="Statistics"><i class="si si-compass"></i>Statistics</a>
+                                        <a  href="/statistics"><i class="si si-compass"></i>Statistics</a>
                                     </li>
                                     <li>
-                                        <a  href="Statistics"><i class="si si-compass"></i>About UNILAG</a>
+                                        <a  href="/about"><i class="si si-compass"></i>About UNILAG</a>
                                     </li>
                                     
                                 </ul>
@@ -77,7 +77,7 @@
                             <div class="content-header-item">
                                 <a class="link-effect font-w700 mr-5" href="index.html">
                                     <i class="si si-fire text-primary"></i>
-                                    <span class="font-size-xl text-dual-primary-dark">code</span><span class="font-size-xl text-primary">base</span>
+                                    <span class="font-size-xl text-dual-primary-dark">lag</span><span class="font-size-xl text-primary">UTME</span>
                                 </a>
                             </div>
                             <!-- END Logo -->
@@ -104,11 +104,11 @@
                           <li routerLinkActive="active">
                               <a  routerLink="/stat"><i class="si si-action-undo"></i>Statistics</a>
                           </li>
-                          <li routerLinkActive="active">
-                              <a  routerLink="/stat"><i class="si si-action-undo"></i>About UNILAG</a>
+                          <li href="active">
+                              <a  routerLink="/about-unilag"><i class="si si-action-undo"></i>About UNILAG</a>
                           </li>
                           <li routerLinkActive="active">
-                              <a  routerLink="/stat"><i class="si si-action-undo"></i>Aggregate Checker</a>
+                              <a  routerLink="/aggregate"><i class="si si-action-undo"></i>Aggregate Checker</a>
                           </li>
                       </ul>
                             <!-- END Header Navigation -->
@@ -124,27 +124,11 @@
                                     {{userData.username}}<i class="fas fa-angle-down ml-5"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right min-width-150" aria-labelledby="page-header-user-dropdown">
-                                    <a class="dropdown-item" href="be_pages_generic_profile.html">
+                                    <a class="dropdown-item" routerLink="/profile/{{username}}">
                                         <i class="si si-user mr-5"></i> Profile
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="be_pages_generic_inbox.html">
-                                        <span><i class="si si-envelope-open mr-5"></i> Inbox</span>
-                                        <span class="badge badge-primary">3</span>
-                                    </a>
-                                    <a class="dropdown-item" href="be_pages_generic_invoice.html">
-                                        <i class="si si-note mr-5"></i> Invoices
-                                    </a>
+                                    </a>        
                                     <div class="dropdown-divider"></div>
-            
-                                    <!-- Toggle Side Overlay -->
-                                    <!-- Layout API, functionality initialized in Codebase() -> uiApiLayout() -->
-                                    <a class="dropdown-item" href="javascript:void(0)" data-toggle="layout" data-action="side_overlay_toggle">
-                                        <i class="si si-wrench mr-5"></i> Settings
-                                    </a>
-                                    <!-- END Side Overlay -->
-            
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" (click)="signOut()">
+                                    <a class="dropdown-item" href="javascript:void(0)" data-toggle="layout" data-action="side_overlay_toggle" (click)="signOut()">
                                         <i class="si si-logout mr-5"></i> Sign Out
                                     </a>
                                 </div>
@@ -154,7 +138,7 @@
                             <!-- Toggle Sidebar -->
                             <!-- Layout API, functionality initialized in Codebase() -> uiApiLayout() -->
                             <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none" data-toggle="layout" data-action="sidebar_toggle">
-                                <i class="fa fa-navicon"></i>
+                                <i class="fas fa-navicon"></i>
                             </button>
                             <!-- END Toggle Sidebar -->
                         </div>

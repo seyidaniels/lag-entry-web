@@ -16,7 +16,6 @@ export class TimeComponent implements OnInit {
   @ViewChild('timer') timer;
 
   ngOnInit() {
-    console.log(this.timer.nativeElement.classList);
     this.timeElapsed = 1801;
     const that = this;
     setInterval(
@@ -40,10 +39,10 @@ export class TimeComponent implements OnInit {
       this.timeup.emit(this.timeElement);
       return;
     }
-    const minutes = Math.floor(this.timeElapsed / 60);
-    const seconds = (this.timeElapsed % 60);
-    // minutes = (minutes < 10) ? ( '0' + minutes) : minutes;
-    // seconds = (seconds < 10) ? ( '0' + seconds) : seconds;
+    let minutes: any = Math.floor(this.timeElapsed / 60);
+    let seconds: any = (this.timeElapsed % 60);
+    minutes = (minutes < 10) ? ( '0' + minutes) : minutes;
+    seconds = (seconds < 10) ? ( '0' + seconds) : seconds;
     this.timeElement = minutes + ':' + seconds;
   }
 

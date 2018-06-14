@@ -9,6 +9,9 @@ import { TestComponent } from '../test/test.component';
 import { ProfileComponent } from '../profile/profile.component';
 import {ResultComponent} from '../result/result.component';
 import { MockResultComponent } from '../mock-result/mock-result.component';
+import { ServerErrorComponent } from '../server-error/server-error.component';
+import { AboutComponent } from '../about/about.component';
+import { AggregateComponent } from '../aggregate/aggregate.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -17,7 +20,10 @@ const routes: Routes = [
   {path: 'test/:subject/:number', component: TestComponent},
   {path: 'profile/:username', component: ProfileComponent},
   {path: 'result/:randomGen', component: ResultComponent},
-  {path: 'mock-result/:randomGen', component: MockResultComponent}
+  {path: 'mock-result/:randomGen', component: MockResultComponent},
+  {path: 'server-error', component: ServerErrorComponent},
+  {path: 'about-unilag', component: AboutComponent},
+  {path: 'aggregate', component: AggregateComponent}
  ];
 
 @NgModule({

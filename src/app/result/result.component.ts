@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
-import { Observable } from 'rxjs/Observable';
+declare var $;
 
 
 @Component({
@@ -88,7 +88,6 @@ export class ResultComponent implements OnInit {
   getPastResults() {
     this.appService.getPastResults().subscribe(
       data => {
-        console.log(data['results'].length);
         if (data['results'].length > 0) {
           this.pastResults = data['results'];
           return;
@@ -112,7 +111,13 @@ export class ResultComponent implements OnInit {
         return;
         }
         if (data['error']) {
-          console.log(data['error']);
+          $.notify({
+            icon: 'fas fa-exclamation',
+            message: data['error']
+          }, {
+            type: 'danger'
+          });
+          console.log();
         }
       }
     );
