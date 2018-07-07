@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
-import html2canvas from 'html2canvas';
+import * as html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-mock-result',

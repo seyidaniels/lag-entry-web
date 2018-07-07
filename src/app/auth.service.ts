@@ -34,13 +34,6 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  checkTokenIfMatch() {
-    const token = this.getToken();
-    return this.http.get('http://localhost:8000/api/check?token=' + token).pipe(
-      catchError(this.handleError('getQuotes', []))
-    );
-  }
-
   logout() {
     const token = this.getToken();
     const body = JSON.stringify({token: token});

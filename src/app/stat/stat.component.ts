@@ -22,17 +22,20 @@ export class StatComponent implements OnInit  {
   }
 
   ngOnInit() {
-    this.appService.getMockQuestions().subscribe(
+    this.appService.getMockResults().subscribe(
             data => {
-              this.data = data['questions'];
+              this.data = data['results'];
+              console.log(this.data);
+              if (this.data.length < 10) {
+                this.array = this.data;
+                return;
+              }
               for (let i = 0; i < this.sum; i++) {
                 this.array.push(this.data[i]);
               }
             }
           );
   }
-
-
 
   addItems(startIndex, endIndex, _method) {
     for (let i = 0; i < this.sum; ++i) {
@@ -55,6 +58,7 @@ export class StatComponent implements OnInit  {
           this.array.push(this.data[i]);
           this.scrolled = false;
       } else {
+        console.log('This is the end');
         break;
       }
     }

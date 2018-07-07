@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import { AppService } from '../app.service';
 import {Router} from '@angular/router';
+import { Helper } from '../Helpers';
 declare var $;
 
 @Component({
@@ -13,7 +14,8 @@ export class MockComponent implements OnInit {
 
   constructor(
     private appService: AppService,
-    private router: Router
+    private router: Router,
+    private helper: Helper
   ) { }
   welcomepage = true;
   number;
@@ -69,21 +71,28 @@ makeid() {
 }
 
 
+calculateAggregate(testscore): number {
+   return  (testscore / 50 ) * 30 + Number(this.helper.calculateWaec()) + (this.helper.getJamb() / 8);
+}
+
 
 confirmSubmit() {
   const randomGen = this.makeid();
-  const score = this.calculate();
-  const percentage = (score / 50) * 100;
-  // const aggregate;
+  const score: number = this.calculate();
+  const percentage = ((score / 50) * 100).toFixed(2);
+  const aggregate = this.calculateAggregate(score);
   this.appService.saveAnswerResult(this.questions, this.userAnswer, score, 'mock', randomGen, percentage);
-  const body = {
-    score: score,
-    percentage: percentage,
-    // aggregate: aggregate,
-    uniqueKey: randomGen
+  const body = {score: score, percentage: percentage, aggregate: aggregate, uniqueKey: randomGen
   };
-  this.appService.saveMock(body);
-  this.router.navigate(['mock-result', randomGen]);
+  this.appService.saveMock(body).subscribe(
+    data => {
+      if (data['message']) {
+        this.router.navigate(['mock-result', randomGen]);
+      } else {
+        console.log('Ooops! An error occured! Try submitting again');
+      }
+    }
+  );
 }
 
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import {FormControl, FormGroup} from '@angular/forms';
+import { Helper } from '../Helpers';
 declare var $;
 
 @Component({
@@ -11,7 +12,7 @@ declare var $;
 export class AggregateComponent implements OnInit {
 
   constructor(
-    private appService: AppService
+    private helper: Helper
   ) { }
 
   aggregateForm;
@@ -30,7 +31,7 @@ export class AggregateComponent implements OnInit {
          if (result) {
           this.waec_result  = Object.values(result);
           this.subjects = Object.keys(result);
-          this.waec_sum = this.calculateWaec(this.waec_result);
+          this.waec_sum = this.helper.calculateWaec();
          }
 
     this.aggregateForm = new FormGroup({
@@ -46,8 +47,23 @@ export class AggregateComponent implements OnInit {
   }
 
   calculateAggregate(value) {
+    console.log(value);
+     // Check if POST UME and WAEC are Invalid
+     if (value.jamb_score > 400 || value.jamb_score < 200 ) {
+      this.error('Invalid Jamb Score');
+      return;
+    }
+    if (value.postutme_score > 50) {
+      this.error('Invalid Post UTME Score');
+      return;
+    }
     let aggregate;
-    if (this.waec_result) {
+    if (this.waec_result && this.jambScore) {
+      console.log('has waec');
+      if (value['postutme_score'] === null) {
+        this.error('You didnt enter post ume score');
+        return;
+      }
       aggregate = (value['jamb_score'] / 8 + ((value['postutme_score'] / 50) * 30 ) + Number(this.waec_sum)).toFixed(2);
       $.notify('Your aggregate is ' + aggregate + '%');
       return;
@@ -59,36 +75,17 @@ export class AggregateComponent implements OnInit {
           return;
         }
       }
-      // Check if POST UME and WAEC are Invalid
-      if (value.jamb_score > 400 || value.jamb_score < 200 ) {
-        this.error('Invalid Jamb Score');
-        return;
-      }
-      if (value.postutme_score > 50) {
-        this.error('Invalid Post UTME Score');
-        return;
-      }
       const waec_results = results.slice(0, 5);
-      const waec_sum = this.calculateWaec(waec_results);
-      aggregate = (value['jamb_score'] / 8 + ((value['postutme_score'] / 50) * 30 ) + Number(waec_sum)).toFixed(2);
+      const result =  waec_results.map(function (x) {
+        return Number(x);
+      });
+      const sum = result.reduce(( a , b) => a + b, 0).toFixed();
+      aggregate = (value['jamb_score'] / 8 + ((value['postutme_score'] / 50) * 30 ) + Number(sum)).toFixed(2);
       $.notify('Your aggregate is ' + aggregate + '%');
-      console.log(aggregate);
     }
-  }
-
-
-  calculateWaec(value: any) {
-    const new_array = [];
-    for ( let i = 0; i < value.length; i ++) {
-      new_array.push(Number(value[i]));
-    }
-    const sum = new_array.reduce(( a , b) => a + b, 0);
-    return sum.toFixed();
   }
 
   error(value) {
     $.notify({message: value }, { type: 'danger'});
   }
-
-
 }

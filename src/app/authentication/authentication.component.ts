@@ -34,8 +34,6 @@ export class AuthenticationComponent implements OnInit {
 
 
   constructor(
-    private appService: AppService,
-    private router:  Router,
     private authService: AuthService,
     private validate: Validation
   ) {}

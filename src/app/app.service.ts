@@ -5,6 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import {  of } from 'rxjs/observable/of';
 import {Router} from '@angular/router';
 const headers = new HttpHeaders({'Content-Type': 'application/json'});
+declare var $;
 
 
 @Injectable()
@@ -104,6 +105,13 @@ export class AppService {
       );
   }
 
+  getMockResults () {
+    return this.http.get('http://localhost:8000/api/mock-results?token=' + this.token)
+      .pipe(
+        catchError(this.handleError('getQuotes', []))
+      );
+  }
+
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -116,11 +124,10 @@ export class AppService {
         return;
       }
       if (error['status'] ===  500) {
-        this.router.navigate(['server-error']);
+        $.notify({message: 'Ooops a server has error occured! Try Again!' }, { type: 'danger'});
         console.log(error);
         return;
       }
-
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };

@@ -9,13 +9,10 @@ export class Validation {
        return true;
     }
     clearErrors(...values: any[]) {
-        for (let i = 0 ; i < values.length; i++) {
-            values[i] = undefined;
-        }
-        // values.forEach( function (e) {
-        //     e = undefined;
-        //     console.log(e);
-        // });
+        values.forEach( function (e) {
+            e = undefined;
+            console.log(e);
+        });
       }
       sum(...numbers: number[]) {
         let aggregateNumber = 0;

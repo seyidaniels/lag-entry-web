@@ -132,6 +132,8 @@ confirmSubmit() {
   this.appService.saveAnswerResult(this.questions, this.userAnswer, score, this.getSubjectName(), randomGen, percentage);
   this.router.navigate(['result', randomGen]);
 }
+
+
 reset() {
   alert('Are your sure you wanna reset?');
   this.userAnswer = [];

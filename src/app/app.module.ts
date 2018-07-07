@@ -26,6 +26,7 @@ import { AboutComponent } from './about/about.component';
 import { AggregateComponent } from './aggregate/aggregate.component';
 import {ExamObject} from './exam/examobject';
 import { Validation } from './Validation';
+import { Helper } from './Helpers';
 
 
 
@@ -59,7 +60,7 @@ import { Validation } from './Validation';
     NgbModule.forRoot(),
     InfiniteScrollModule
   ],
-  providers: [AppService, AuthService, Validation],
+  providers: [AppService, AuthService, Validation, Helper],
   bootstrap: [AppComponent]
 })
 export class AppModule {
