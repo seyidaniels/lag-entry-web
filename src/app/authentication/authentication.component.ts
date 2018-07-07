@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AuthService } from '../auth.service';
+import {Validation} from '../Validation';
 
 
 @Component({
@@ -29,12 +30,14 @@ export class AuthenticationComponent implements OnInit {
   signin_validation_errors: any;
  signin_errors;
  signin_success;
+ userData;
 
 
   constructor(
     private appService: AppService,
     private router:  Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private validate: Validation
   ) {}
 
   ngOnInit() {
@@ -57,14 +60,7 @@ export class AuthenticationComponent implements OnInit {
 
   submitSignUp(value) {
     this.clearErrors();
-    if (
-      value.username === '' ||
-      value.fullname === '' ||
-      value.email === '' ||
-      value.password === '' ||
-      value.course === '' ||
-      value.jambScore === ''
-    ) {
+    if (this.validate.validate(value)) {
       this.register_errors = 'Kindly fill your credentials';
       return;
     }
@@ -93,7 +89,7 @@ export class AuthenticationComponent implements OnInit {
 
   submitSignIn(value) {
     this.clearErrors();
-    if (value.username === '' || value.password === '') {
+    if (!this.validate.validate(value)) {
           this.signin_errors = 'Insufficient Credentials Provided';
           return;
         }
@@ -117,6 +113,8 @@ export class AuthenticationComponent implements OnInit {
             if (data['token']) {
               this.saveToken(data['token']);
               this.signin_success = 'Authentication Successful!';
+              this.userData = JSON.stringify(data['user']);
+              localStorage.setItem('user', this.userData);
               setTimeout(function () {
                 location.reload();
               }, 1000);

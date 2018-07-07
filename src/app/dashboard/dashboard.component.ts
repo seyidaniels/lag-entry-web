@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {Router} from '@angular/router';
-import { AppService } from '../app.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Validation } from '../Validation';
 
 declare var $: any;
 
@@ -12,7 +12,7 @@ declare var $: any;
 })
 export class DashboardComponent implements OnInit {
 
-  constructor( private router: Router, private appService: AppService) {
+  constructor( private router: Router, private validate: Validation) {
    }
    @ViewChild('number') number;
 
@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
       third_required:  new FormControl()
     });
         this.userData = JSON.parse(localStorage.getItem('user'));
-        this.user_id = this.userData['id'];
+        this.user_id = this.userData.id;
         const result = JSON.parse(localStorage.getItem('waec_' + this.user_id));
         if (result) {
           this.waec_result  = Object.values(result);
@@ -51,7 +51,6 @@ export class DashboardComponent implements OnInit {
         // Store User Jamb Result
         localStorage.setItem('jamb_' + this.user_id, this.userData['jambScore']);
       }
-    // console.log(this.calculateWaec(this.waec_results));
 
 
   startQuiz(value) {
@@ -65,7 +64,6 @@ export class DashboardComponent implements OnInit {
     const opt = e.options[sel];
     const number = Number(opt.text);
     if (number === 0) {
-      console.log('You have not chosen a value');
       $.notify({
         icon: 'fas fa-exclamation',
         message: 'You have not chosen a value.'
@@ -88,11 +86,7 @@ export class DashboardComponent implements OnInit {
   submitolevelForm(value) {
     this.waec_error = undefined;
     if (
-        value.maths === null ||
-        value.english === null ||
-        value.first_required === null ||
-        value.second_required === null ||
-        value.third_required  === null
+      !this.validate.validate(value)
       ) {
         this.waec_error = 'Incomplete WAEC Details';
         return;

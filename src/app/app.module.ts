@@ -25,6 +25,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AboutComponent } from './about/about.component';
 import { AggregateComponent } from './aggregate/aggregate.component';
 import {ExamObject} from './exam/examobject';
+import { Validation } from './Validation';
 
 
 
@@ -58,7 +59,7 @@ import {ExamObject} from './exam/examobject';
     NgbModule.forRoot(),
     InfiniteScrollModule
   ],
-  providers: [AppService, AuthService],
+  providers: [AppService, AuthService, Validation],
   bootstrap: [AppComponent]
 })
 export class AppModule {

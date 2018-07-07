@@ -18,6 +18,7 @@ export class MockComponent implements OnInit {
   welcomepage = true;
   number;
   timeup;
+  error;
   questions = [''];
   userAnswer = new Array(this.questions.length);
   correctanswers = new Array();
@@ -33,6 +34,17 @@ export class MockComponent implements OnInit {
   this.timeUp(this.timeup);
   }
 
+
+  startMock() {
+    // Check if User has a waec and jamb result;
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (localStorage.getItem('waec_'.concat(user.id))  && user.jambScore  ) {
+      this.welcomepage = !this.welcomepage;
+    } else {
+      this.error = 'Ooops! You must have a waec and jamb result saved';
+    }
+  }
+
   next(i) {
     if (this.questions.length - 1 !== this.i) {
       this.i = i + 1;
@@ -40,6 +52,8 @@ export class MockComponent implements OnInit {
     }
     this._success.next(`This is the last question`);
 }
+
+
 
 
 submit() {
@@ -54,12 +68,21 @@ makeid() {
   return text;
 }
 
+
+
 confirmSubmit() {
   const randomGen = this.makeid();
-  const dateSubmitted = new Date().getDate();
   const score = this.calculate();
   const percentage = (score / 50) * 100;
+  // const aggregate;
   this.appService.saveAnswerResult(this.questions, this.userAnswer, score, 'mock', randomGen, percentage);
+  const body = {
+    score: score,
+    percentage: percentage,
+    // aggregate: aggregate,
+    uniqueKey: randomGen
+  };
+  this.appService.saveMock(body);
   this.router.navigate(['mock-result', randomGen]);
 }
 

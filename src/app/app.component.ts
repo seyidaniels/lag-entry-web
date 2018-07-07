@@ -34,13 +34,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem('token') !== null) {
       this.loggedIn = true;
-      this.appService.getUserDetails().subscribe(
-        data => {
-          this.userData = data['user'];
-          this.username = this.userData['username'];
-          localStorage.setItem('user', JSON.stringify(this.userData));
-        }
-      );
+      this.userData = JSON.parse(localStorage.getItem('user'));
+      this.username = this.userData.username;
       this.router.navigate(['dashboard']);
       this.loader();
       this.appService.loadScriptPage(this.dashboardScripts);

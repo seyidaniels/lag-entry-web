@@ -1,5 +1,5 @@
 <div class="bg-image bg-image-bottom" style="background-image: url('assets/img/photos/photo13@2x.jpg');">
-  <div class="bg-primary-dark-op py-30">
+  <div class="bg-primary-dark-op">
       <div class="content content-full text-center">
           <!-- Avatar -->
           <div class="mb-15">
@@ -93,7 +93,7 @@
                 <div class="alert alert-success" *ngIf="update_success">
                     {{update_success}}
                 </div>
-                <form [formGroup] = "updateForm" (ngSubmit) = "submitupdate(updateForm.value)" >
+                <form [formGroup] = "updateForm" (ngSubmit) = "submitUpdateForm(updateForm.value)" >
                     <div class="form-group row">
                                 <div class="col-12">
                                     <div class="form-material ">
@@ -143,7 +143,7 @@
                     <div class="form-group row">
                             <div class="col-12">
                                 <div class="form-material ">
-                                    <input type="number" class="form-control" formControlName="jambScore"  >
+                                    <input type="number" class="danger form-control" formControlName="jambScore"  >
                                     <label for="signup-jambScore">JAMB Score</label>
                                 </div>
                             </div>
@@ -154,7 +154,7 @@
                     </div>
                     <div class="form-group row gutters-tiny">
                         <div class="col-12 mb-10">
-                            <button type="submit" id="updateBTN" class="btn btn-block btn-hero btn-noborder btn-rounded btn-alt-success">
+                            <button type="submit" id="updateBTN" class="btn btn-block btn-hero btn-noborder btn-alt-success">
                                 <i class="si si-user-follow mr-10"></i> Update Profile
                             </button>
                         </div>
@@ -165,62 +165,61 @@
         <!-- END Sign Up Form -->
 </div>
 <div *ngIf="changePword">
-    Change Pword Clicked;
         <!-- Sign Up Form -->
-        <!-- <div class="row justify-content-center px-5 mt-20">
+        <div class="row justify-content-center px-5 mt-20"> 
              <div class="col-sm-8 col-md-6 col-xl-4">
-                 <div class="alert alert-danger" *ngIf="update_errors">
-                         {{update_errors}}
+                 <div class="alert alert-danger" *ngIf="password_errors">
+                         {{password_errors}}
                  </div>
-                 <div class="alert alert-success" *ngIf="update_success">
-                     {{update_success}}
+                 <div class="alert alert-success" *ngIf="password_success">
+                     {{password_success}}
                  </div>
-                 <form [formGroup] = "signUpForm" (ngSubmit) = "submitSignUp(signUpForm.value)" >
+                 <form [formGroup] = "changePwordForm" (ngSubmit) = "submitchangePwordForm(changePwordForm.value)" >
                      <div class="form-group row">
                                  <div class="col-12">
                                      <div class="form-material ">
-                                         <input type="passwword" required class="form-control" formControlName="fullname" >
-                                         <label for="signup-fullname">Current Password</label>
+                                         <input type="password" class="form-control" formControlName="current_password" >
+                                         <label for="update-current-password">Current Password</label>
                                      </div>
                                  </div>
-                                 <div class="text-danger text-center" *ngIf="update_validation_errors">
+                                 <div class="text-danger text-center" *ngIf="password_validation_errors">
                                  
-                                     {{update_validation_errors.fullname}}
+                                     {{password_validation_errors.fullname}}
                                  </div>
                      </div>
                      <div class="form-group row">
                          <div class="col-12">
                              <div class="form-material">
                                  <input type="password" class="form-control" formControlName="password" >
-                                 <label for="signup-password">Password</label>
+                                 <label for="update-password">Password</label>
                              </div>
                          </div>
-                         <div class="text-danger text-center" *ngIf="update_validation_errors">
+                         <div class="text-danger text-center" *ngIf="password_validation_errors">
                                  
-                             {{update_validation_errors.password}}
+                             {{password_validation_errors.password}}
                      </div>
                      </div>
                      <div class="form-group row">
                          <div class="col-12">
                              <div class="form-material">
                                  <input type="password" class="form-control" formControlName="password_confirmation"  >
-                                 <label for="signup-password-confirm">Password Confirmation</label>
+                                 <label for="update-password-confirm">Password Confirmation</label>
                              </div>
                          </div>
-                         <div class="text-danger text-center" *ngIf="update_validation_errors">
+                         <div class="text-danger text-center" *ngIf="password_validation_errors">
                                  
-                             {{update_validation_errors.password_confirmation}}
+                             {{password_validation_errors.password_confirmation}}
                      </div>
                      </div>
                      <div class="form-group row gutters-tiny">
                          <div class="col-12 mb-10">
                              <button type="submit" id="updateBTN" class="btn btn-block btn-hero btn-noborder btn-rounded btn-alt-success">
-                                 <i class="si si-user-follow mr-10"></i> Update Profile
+                                 <i class="si si-user-follow mr-10"></i> Change Password
                              </button>
                          </div>
                      </div>
                  </form>
              </div>
-         </div> -->
+         </div>
          <!-- END Sign Up Form -->
  </div>

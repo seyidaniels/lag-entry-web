@@ -1,5 +1,8 @@
 <div *ngIf="welcomepage">
         <div class="col-md-6 offset-md-3 offset-lg-3 mt-100" >
+                <div class=" error alert alert-danger" *ngIf="error">
+                        {{error}}
+                    </div>
                 <div class="block block-themed block-rounded">
                     <div class="block-header bg-gd-sea">
                         <h3 class="block-title">MOCK Practice Examination</h3>
@@ -10,7 +13,7 @@
                             facere voluptatibus, necessitatibus consequuntur recusandae quisquam praesentium 
                             commodi in id accusamus pariatur!</p>
                         <p class="text-cener">
-                                <button class="btn btn-danger btn-lg my-10" (click) ="welcomepage = !welcomepage">
+                                <button class="btn btn-danger btn-lg my-10" (click) ="startMock()">
                                      <span><i class="fas fa-step-forward"></i></span>   Proceed!
                                 </button>
                          </p>

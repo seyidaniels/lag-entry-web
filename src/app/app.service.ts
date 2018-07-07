@@ -20,33 +20,28 @@ export class AppService {
     correctanswers: []
   };
 
+  private token;
+
   constructor(
     private http: HttpClient,
-    private router: Router
-  ) { }
-
-  getUserDetails() {
-    const token = this.getToken();
-    return this.http.get('http://localhost:8000/api/get-user?token=' + token ).pipe(
-      catchError(this.handleError('getQuotes', []))
-    );
-  }
+    private router: Router,
+  ) {
+    this.token = localStorage.getItem('token');
+   }
 
   getQuestions (subject, number): Observable<any> {
-    const token = this.getToken();
     const body = {
       subject: subject,
       number: number
     };
-    return this.http.post('http://localhost:8000/api/get-questions?token=' + token, body, {headers: headers})
+    return this.http.post('http://localhost:8000/api/get-questions?token=' + this.token, body, {headers: headers})
       .pipe(
         catchError(this.handleError('getQuotes', []))
       );
   }
 
   getAllComb() {
-    const token = this.getToken();
-    return this.http.get('http://localhost:8000/api/test-all?token=' + token)
+    return this.http.get('http://localhost:8000/api/test-all?token=' + this.token)
       .pipe(
         catchError(this.handleError('getQuotes', []))
       );
@@ -63,8 +58,7 @@ export class AppService {
   }
 
   deleteResult(uniqueKey) {
-    const token = this.getToken();
-    return this.http.delete('http://localhost:8000/api/delete-result/' + uniqueKey + '?token=' + token ).pipe(
+    return this.http.delete('http://localhost:8000/api/delete-result/' + uniqueKey + '?token=' + this.token ).pipe(
       catchError(this.handleError('getQuotes', []))
     );
   }
@@ -74,22 +68,37 @@ export class AppService {
   }
 
   getPastResults() {
-    const token = this.getToken();
-    return this.http.get('http://localhost:8000/api/past-results?token=' + token ).pipe(
+    return this.http.get('http://localhost:8000/api/past-results?token=' + this.token ).pipe(
+      catchError(this.handleError('getQuotes', []))
+    );
+  }
+
+  updateProfile(body) {
+    return this.http.put('http://localhost:8000/api/update-profile?token= ' + this.token, body, {headers: headers}).pipe(
+      catchError(this.handleError('getQuotes', []))
+    );
+  }
+
+  changePassword(body) {
+    return this.http.put('http://localhost:8000/api/change-password?token= ' + this.token, body, {headers: headers}).pipe(
       catchError(this.handleError('getQuotes', []))
     );
   }
 
   saveResult(body) {
-    const token = this.getToken();
-    return this.http.post('http://localhost:8000/api/save-result?token=' + token, body, {headers: headers} ).pipe(
+    return this.http.post('http://localhost:8000/api/save-result?token=' + this.token, body, {headers: headers} ).pipe(
+      catchError(this.handleError('getQuotes', []))
+    );
+  }
+
+  saveMock(body) {
+    return this.http.post('http://localhost:8000/api/save-mock-result?token=' + this.token, body, {headers: headers} ).pipe(
       catchError(this.handleError('getQuotes', []))
     );
   }
 
   getMockQuestions() {
-    const token = this.getToken();
-    return this.http.get('http://localhost:8000/api/get-mock-questions?token=' + token)
+    return this.http.get('http://localhost:8000/api/get-mock-questions?token=' + this.token)
       .pipe(
         catchError(this.handleError('getQuotes', []))
       );
@@ -108,6 +117,7 @@ export class AppService {
       }
       if (error['status'] ===  500) {
         this.router.navigate(['server-error']);
+        console.log(error);
         return;
       }
 
@@ -139,11 +149,4 @@ export class AppService {
       }
     }
   }
-
-  getToken() {
-    return localStorage.getItem('token');
-  }
-
-
-
 }
