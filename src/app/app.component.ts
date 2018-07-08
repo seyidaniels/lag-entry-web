@@ -37,29 +37,10 @@ export class AppComponent implements OnInit {
       this.userData = JSON.parse(localStorage.getItem('user'));
       this.username = this.userData.username;
       this.router.navigate(['dashboard']);
-      this.loader();
-      this.appService.loadScriptPage(this.dashboardScripts);
+     this.appService.loadScriptPage(this.dashboardScripts);
       return;
     }
 
-  }
-
-  loader() {
-     // This is a sample
-     const sampleUrl = 'http://slowwly.robertomurray.co.uk/delay/6000/url/https://jsonplaceholder.typicode.com/posts/1';
-     this.progressService.start();
-     setTimeout(() => {
-       this.progressService.set(0.1);
-     }, 500);
-     setTimeout(() => {
-       this.progressService.inc(0.2);
-     }, 500);
-     this.http.get(sampleUrl)
-       .subscribe((response) => {
-         this.progressService.done();
-         this.posts = response.json();
-       });
-  // Sample shaa
   }
 
   doLogin(value) {

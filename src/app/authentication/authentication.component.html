@@ -11,7 +11,7 @@
                                     <div class="py-30 px-5 text-center">
                                             <a class="link-effect font-w700" href="index.html">
                                                 <i class="si si-fire"></i>
-                                                <span class="font-size-xl text-primary-dark">code</span><span class="font-size-xl">base</span>
+                                                <span class="font-size-xl text-primary-dark">lag</span><span class="font-size-xl">postume</span>
                                             </a>
                                             <h1 class="h2 font-w700 mt-50 mb-10">Welcome to Your Dashboard</h1>
                                             <h2 class="h4 font-w400 text-muted mb-0">Please sign in</h2>
@@ -78,7 +78,7 @@
                     <div class="py-30 px-5 text-center">
                             <a class="link-effect font-w700" href="index.html">
                                 <i class="si si-fire"></i>
-                                <span class="font-size-xl text-primary-dark">code</span><span class="font-size-xl">base</span>
+                                <span class="font-size-xl text-primary-dark">lag</span><span class="font-size-xl">POSTUME</span>
                             </a>
                             <h1 class="h2 font-w700 mt-50 mb-10">Don’t worry, we’ve got your back</h1>
                             <h2 class="h4 font-w400 text-muted mb-0">Please enter your username or email</h2>
@@ -88,17 +88,19 @@
                         <!-- Reminder Form -->
                         <div class="row justify-content-center px-5">
                             <div class="col-sm-8 col-md-6 col-xl-4">
-                                <form class="js-validation-reminder" action="be_pages_auth_all.html" method="post">
+                                <form >
+                                    <div *ngIf="reset_success" class="alert alert-success">{{reset_success}}</div>
+                                    <div *ngIf="reset_error" class="alert alert-danger">{{reset_error}}</div>
                                     <div class="form-group row">
                                         <div class="col-12">
-                                            <div class="form-material floating">
-                                                <input type="text" class="form-control" id="reminder-credential" name="reminder-credential">
-                                                <label for="reminder-credential">Username or Email</label>
+                                            <div class="form-material">
+                                                <input type="text" class="form-control" id="remember-credential">
+                                                <label for="reminder-credential">Email</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-block btn-hero btn-noborder btn-rounded btn-alt-primary">
+                                        <button (click)="clickResetPassword()" class="btn btn-block btn-hero btn-noborder btn-rounded btn-alt-primary">
                                             <i class="fa fa-asterisk mr-10"></i> Password Reminder
                                         </button>
                                         <a class="btn btn-block btn-noborder btn-rounded btn-alt-secondary" (click) ="forgot = ! forgot" >

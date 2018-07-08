@@ -24,11 +24,16 @@ import { ServerErrorComponent } from './server-error/server-error.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AboutComponent } from './about/about.component';
 import { AggregateComponent } from './aggregate/aggregate.component';
-import {ExamObject} from './exam/examobject';
 import { Validation } from './Validation';
 import { Helper } from './Helpers';
+import { AuthGuardService } from './auth-guard.service';
+import { JwtModule } from '@auth0/angular-jwt';
+import { JwtHelperService, JwtModuleOptions } from '../../node_modules/@auth0/angular-jwt';
 
 
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 
 @NgModule({
@@ -49,6 +54,16 @@ import { Helper } from './Helpers';
     AggregateComponent,
   ],
   imports: [
+    // ...
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:4200'],
+        blacklistedRoutes: ['localhost:4200']
+      }
+    }),
+
     CommonModule,
     AppRoutingModule,
     FormsModule,
@@ -60,7 +75,7 @@ import { Helper } from './Helpers';
     NgbModule.forRoot(),
     InfiniteScrollModule
   ],
-  providers: [AppService, AuthService, Validation, Helper],
+  providers: [AppService, AuthService, Validation, Helper, AuthGuardService, JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

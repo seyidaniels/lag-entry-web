@@ -31,6 +31,8 @@ export class AuthenticationComponent implements OnInit {
  signin_errors;
  signin_success;
  userData;
+ reset_success;
+ reset_error;
 
 
   constructor(
@@ -58,7 +60,7 @@ export class AuthenticationComponent implements OnInit {
 
   submitSignUp(value) {
     this.clearErrors();
-    if (this.validate.validate(value)) {
+    if (!this.validate.validate(value)) {
       this.register_errors = 'Kindly fill your credentials';
       return;
     }
@@ -73,9 +75,9 @@ export class AuthenticationComponent implements OnInit {
           submitBTN.innerHTML = '<i class="si si-user-follow mr-10"></i> Sign Up';
           return;
         }
-        if (data['message'] && data['token']) {
+        if (data['message']) {
           this.register_success = 'You have successfully created an account with us';
-          this.saveToken(data['token']);
+          this.register_success += '<br>Kindly login to access your account';
           setTimeout(function() {
             location.reload();
           }, 2500);
@@ -119,6 +121,22 @@ export class AuthenticationComponent implements OnInit {
             }
           }
         );
+  }
+
+  clickResetPassword() {
+  const userdetails = <HTMLInputElement> document.getElementById('remember-credential');
+  this.authService.resetPassword(userdetails.value).subscribe(
+    data => {
+      if (data['success']) {
+        this.reset_success = 'A password confirmation has been sent to your email';
+        return;
+      }
+      if (data['error']) {
+        this.reset_error = 'Ooops! No User associated with inputted email';
+        return;
+      }
+    }
+  );
   }
 
 

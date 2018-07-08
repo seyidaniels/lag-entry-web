@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs/Observable';
 import { catchError, map, tap } from 'rxjs/operators';
 import {  of } from 'rxjs/observable/of';
@@ -7,16 +8,25 @@ import 'Rxjs/rx';
 
 
 const headers = new HttpHeaders({'Content-Type': 'application/json'});
+const url = 'http://localhost:8000/api/auth/';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public jwtHelper: JwtHelperService) { }
+
+  // ...
+  public isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    // Check whether the token is expired and return
+    // true or false
+    return !this.jwtHelper.isTokenExpired(token);
+  }
 
 
   signIn(details) {
     const body = JSON.stringify(details);
-    return this.http.post('http://localhost:8000/api/auth/sign-in', body, {headers: headers})
+    return this.http.post(url + 'sign-in', body, {headers: headers})
       .pipe(
         catchError(this.handleError('getQuotes', []))
       );
@@ -24,10 +34,16 @@ export class AuthService {
 
   signUp(details) {
     const body = JSON.stringify(details);
-    return this.http.post('http://localhost:8000/api/auth/sign-up', body, {headers: headers})
+    return this.http.post(url + 'sign-up', body, {headers: headers})
       .pipe(
         catchError(this.handleError('getQuotes', []))
       );
+  }
+  resetPassword(data) {
+    return this.http.get(url + 'resetPassword/' + data, {headers: headers})
+    .pipe(
+      catchError(this.handleError('getQuotes', []))
+    );
   }
 
   getToken() {

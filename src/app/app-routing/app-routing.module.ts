@@ -12,18 +12,19 @@ import { MockResultComponent } from '../mock-result/mock-result.component';
 import { ServerErrorComponent } from '../server-error/server-error.component';
 import { AboutComponent } from '../about/about.component';
 import { AggregateComponent } from '../aggregate/aggregate.component';
+import {AuthGuardService as AuthGuard} from '../auth-guard.service';
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent },
-  {path: 'stat', component: StatComponent},
-  {path: 'mock', component: MockComponent},
-  {path: 'test/:subject/:number', component: TestComponent},
-  {path: 'profile/:username', component: ProfileComponent},
-  {path: 'result/:randomGen', component: ResultComponent},
-  {path: 'mock-result/:randomGen', component: MockResultComponent},
-  {path: 'server-error', component: ServerErrorComponent},
-  {path: 'about-unilag', component: AboutComponent},
-  {path: 'aggregate', component: AggregateComponent}
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  {path: 'stat', component: StatComponent, canActivate: [AuthGuard]},
+  {path: 'mock', component: MockComponent, canActivate: [AuthGuard]},
+  {path: 'test/:subject/:number', component: TestComponent, canActivate: [AuthGuard]},
+  {path: 'profile/:username', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'result/:randomGen', component: ResultComponent, canActivate: [AuthGuard]},
+  {path: 'mock-result/:randomGen', component: MockResultComponent, canActivate: [AuthGuard]},
+  {path: 'server-error', component: ServerErrorComponent, canActivate: [AuthGuard]},
+  {path: 'about-unilag', component: AboutComponent,  canActivate: [AuthGuard]},
+  {path: 'aggregate', component: AggregateComponent, canActivate: [AuthGuard]}
  ];
 
 @NgModule({
