@@ -1,20 +1,6 @@
 <div class="bg-image bg-image-bottom" style="background-image: url('assets/img/photos/photo13@2x.jpg');">
   <div class="bg-primary-dark-op">
       <div class="content content-full text-center">
-          <!-- Avatar -->
-          <div class="mb-15">
-              <a class="img-link">
-                  <img class="img-avatar img-avatar96 img-avatar-thumb" src="assets/img/avatars/avatar15.jpg" alt="">
-              </a>
-              <div class="form-group row mt-10">
-                <label class="col-12 text-info" for="example-file-input">Change Display Picture</label>
-                <div class="col-12">
-                    <input type="file" id="example-file-input" name="example-file-input">
-                </div>
-                </div>
-          </div>
-          <!-- END Avatar -->
-
           <!-- Personal -->
           <h1 class="h3 text-white font-w700 mb-10 mt-15">{{userData['fullname']}}</h1>
           <h2 class="h5 text-white-op">
@@ -34,14 +20,14 @@
   </div>
 </div>
 
-<div class="row gutters-tiny mt-20 justify-content-center" *ngIf="stats">
+<div class="row gutters-tiny mt-20 justify-content-center" *ngIf="!stats">
     <div class="col-6 col-md-4 col-xl-2">
         <a class="block block-transparent text-center bg-primary" href="javascript:void(0)">
             <div class="block-content">
                 <p class="font-size-h1 text-white">
-                    <strong>$499</strong>
+                    <strong>{{statistics['noofmocks']}}</strong>
                 </p>
-                <p class="font-w600 text-white-op">Earnings</p>
+                <p class="font-w600 text-white-op">MOCK Tests</p>
             </div>
         </a>
     </div>
@@ -49,10 +35,10 @@
         <a class="block block-transparent text-center bg-success" href="javascript:void(0)">
             <div class="block-content">
                 <p class="font-size-h1 text-white">
-                    <strong>10</strong>
+                    <strong> {{statistics['highestMock']}} </strong>
                 </p>
                 <p class="font-w600 text-white-op">
-                    <i class="fa fa-envelope mr-5"></i> Messages
+                    <i class="fa fa-envelope mr-5"></i> Highest Mock Score
                 </p>
             </div>
         </a>
@@ -61,22 +47,10 @@
         <a class="block block-transparent text-center bg-gd-sun" href="javascript:void(0)">
             <div class="block-content">
                 <p class="font-size-h1 text-white">
-                    <strong>3</strong>
+                    <strong>{{statistics['highestAggregate']}}%</strong>
                 </p>
                 <p class="font-w600 text-white-op">
-                    <i class="fa fa-shopping-cart mr-5"></i> Products
-                </p>
-            </div>
-        </a>
-    </div>
-    <div class="col-6 col-md-4 col-xl-2">
-        <a class="block block-transparent text-center bg-corporate" href="javascript:void(0)">
-            <div class="block-content">
-                <p class="font-size-h1 text-white">
-                    <strong>98.25</strong>
-                </p>
-                <p class="font-w600 text-white-op">
-                    <i class="fa fa-line-chart mr-5"></i> Sales/Week
+                    <i class="fa fa-shopping-cart mr-5"></i> Highest Aggregate
                 </p>
             </div>
         </a>

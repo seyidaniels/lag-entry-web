@@ -1,9 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+
 import {Subject} from 'rxjs/Subject';
 import { AppService } from '../app.service';
-import {Router} from '@angular/router';
+import {Router, NavigationEnd} from '@angular/router';
 import { Helper } from '../Helpers';
 declare var $;
+
+export enum KEY_CODE {
+  RIGHT_ARROW = 39,
+  LEFT_ARROW = 37
+}
+
+
 
 @Component({
   selector: 'app-mock',
@@ -12,11 +20,6 @@ declare var $;
 })
 export class MockComponent implements OnInit {
 
-  constructor(
-    private appService: AppService,
-    private router: Router,
-    private helper: Helper
-  ) { }
   welcomepage = true;
   number;
   timeup;
@@ -26,6 +29,29 @@ export class MockComponent implements OnInit {
   correctanswers = new Array();
   i = 0;
   private _success = new Subject<string>();
+
+  @HostListener('window:keyup', ['$event'])
+keyEvent(event: KeyboardEvent) {
+  console.log(event);
+  if (event.keyCode === KEY_CODE.RIGHT_ARROW) {
+    this.next(this.i);
+  }
+
+  if (event.keyCode === KEY_CODE.LEFT_ARROW) {
+    this.previous(this.i);
+  }
+}
+
+
+
+  constructor(
+    private appService: AppService,
+    private router: Router,
+    private helper: Helper
+  ) { }
+
+
+
 
   ngOnInit() {
    this.appService.getMockQuestions().subscribe(
@@ -37,6 +63,8 @@ export class MockComponent implements OnInit {
   }
 
 
+
+
   startMock() {
     // Check if User has a waec and jamb result;
     const user = JSON.parse(localStorage.getItem('user'));
@@ -46,13 +74,20 @@ export class MockComponent implements OnInit {
       this.error = 'Ooops! You must have a waec and jamb result saved';
     }
   }
+previous(i) {
+  if (this.i !== 0) {
+    this.i = i - 1;
+    return;
+  }
+    $.notify('This is the first');
+}
 
   next(i) {
     if (this.questions.length - 1 !== this.i) {
       this.i = i + 1;
       return;
     }
-    this._success.next(`This is the last question`);
+    $.notify('This is the last');
 }
 
 
@@ -108,13 +143,6 @@ calculate(): number {
 }
 
 
-previous(i) {
-  if (this.i !== 0) {
-    this.i = i - 1;
-    return;
-  }
-    this._success.next(`This is the first question `);
-}
 
 toQuestion (i) {
   this.i = i;

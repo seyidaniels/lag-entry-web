@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import * as html2canvas from 'html2canvas';
+declare var $: any;
+export enum KEY_CODE {
+  RIGHT_ARROW = 39,
+  LEFT_ARROW = 37
+}
+
 
 @Component({
   selector: 'app-mock-result',
@@ -8,7 +14,7 @@ import * as html2canvas from 'html2canvas';
   styleUrls: ['./mock-result.component.css']
 })
 export class MockResultComponent implements OnInit {
-
+  i = 0;
   questions = [''];
   showAnswers = false;
   userAnswers;
@@ -19,19 +25,30 @@ export class MockResultComponent implements OnInit {
   noPastResults;
   lastData;
   subject;
-  resultScripts = [
-    'assets/js/pages/html2canvas.min.js',
-  ];
   constructor(
     private appService: AppService
   ) { }
-
   ngOnInit() {
     this.results = this.appService.getResults();
     this.questions = this.results['questions'];
     this.userAnswers = this.results['answers'];
     this.getPastResults();
-    this.appService.loadScriptPage(this.resultScripts);
+    console.log(this.questions);
+  }
+
+  previous(i) {
+    if (this.i !== 0) {
+      this.i = i - 1;
+      return;
+    }
+      $.notify('This is the first');
+  }
+    next(i) {
+      if (this.questions.length - 1 !== this.i) {
+        this.i = i + 1;
+        return;
+      }
+      $.notify('This is the last');
   }
 
   save() {

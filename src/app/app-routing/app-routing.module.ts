@@ -16,7 +16,6 @@ import {AuthGuardService as AuthGuard} from '../auth-guard.service';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  {path: 'stat', component: StatComponent, canActivate: [AuthGuard]},
   {path: 'mock', component: MockComponent, canActivate: [AuthGuard]},
   {path: 'test/:subject/:number', component: TestComponent, canActivate: [AuthGuard]},
   {path: 'profile/:username', component: ProfileComponent, canActivate: [AuthGuard]},

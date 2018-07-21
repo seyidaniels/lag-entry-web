@@ -112,6 +112,13 @@ export class AppService {
       );
   }
 
+  getProfileStatistics () {
+    return this.http.get('http://localhost:8000/api/profile-stat?token=' + this.token)
+      .pipe(
+        catchError(this.handleError())
+      );
+  }
+
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

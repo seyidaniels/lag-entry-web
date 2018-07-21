@@ -14,7 +14,6 @@ import { TestComponent } from './test/test.component';
 import {HttpClientModule} from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {CountDown} from 'ng4-date-countdown-timer';
 import { TimeComponent } from './time/time.component';
 import { ResultComponent } from './result/result.component';
 import { AuthService } from './auth.service';
@@ -44,7 +43,6 @@ export function tokenGetter() {
     DashboardComponent,
     ProfileComponent,
     TestComponent,
-    CountDown,
     TimeComponent,
     ResultComponent,
     AuthenticationComponent,

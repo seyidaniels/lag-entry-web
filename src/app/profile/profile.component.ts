@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
 import {Validation} from '../Validation';
@@ -14,7 +15,7 @@ export class ProfileComponent implements OnInit {
 
   userData;
   editProfile;
-  stats = true;
+  stats;
   changePword;
   updateForm;
   changePwordForm;
@@ -24,12 +25,25 @@ export class ProfileComponent implements OnInit {
   password_success;
   password_validation_errors;
   update_validation_errors;
+  statistics = [''];
 
 
   ngOnInit() {
     this.userData = JSON.parse(localStorage.getItem('user'));
     this.setupdateForm();
     this.setupChangePwordForm();
+    this.getStats();
+  }
+
+  getStats() {
+    this.appService.getProfileStatistics().subscribe(
+      data  => {
+        if (data['stats']) {
+          this.statistics = data['stats'];
+          console.log(this.statistics);
+        }
+      }
+    );
   }
 
   setupdateForm() {

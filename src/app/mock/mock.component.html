@@ -1,5 +1,5 @@
-<div *ngIf="welcomepage">
-        <div class="col-md-6 offset-md-3 offset-lg-3 mt-100" >
+<div *ngIf="welcomepage" >
+        <div class="col-md-6 offset-md-3 offset-lg-3 mt-50" >
                 <div class=" error alert alert-danger" *ngIf="error">
                         {{error}}
                     </div>
@@ -8,10 +8,11 @@
                         <h3 class="block-title">MOCK Practice Examination</h3>
                     </div>
                     <div class="block-content">
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                            Eaque illo fugiat debitis voluptas magnam, harum blanditiis cumque ad
-                            facere voluptatibus, necessitatibus consequuntur recusandae quisquam praesentium 
-                            commodi in id accusamus pariatur!</p>
+                        <p>You are about to start the mock examination. 
+                        Note that you have only thirty minutes to answer these questions and submit else the computer automatically submits for you.</p>
+                        <p>You can use the 'next' button to go to another question and the 'previous' button to go back.
+                            Note that you could also use the forward and backward arrows on your keyboard in place of the next and previous keys</p>
+                            <p>All questions carry equal marks, click the 'start' button to proceed with the examination. BEST OF LUCK!</p>
                         <p class="text-cener">
                                 <button class="btn btn-danger btn-lg my-10" (click) ="startMock()">
                                      <span><i class="fas fa-step-forward"></i></span>   Proceed!
@@ -23,7 +24,7 @@
 </div>
 
 
-<div *ngIf="!welcomepage">
+<div *ngIf="!welcomepage"  (keydown)="change($event)">
     <div class="row" *ngIf="questions" >
             <div class="col-md-5 mt-4">
                     <div class="row" *ngIf="questions">
@@ -77,6 +78,7 @@
                                     <span class="css-control-indicator"></span> {{questions[i].optiona}}
                                 </label>
                             </div>
+
                             <div class="col-12">
                                     <label class="css-control css-control-lg css-control-success css-radio">
                                         <input type="radio" class="css-control-input" name="user_answer" [(ngModel)]="userAnswer[i]" value="b">

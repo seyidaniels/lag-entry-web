@@ -26,7 +26,6 @@
     "core-js": "^2.4.1",
     "firebase": "^5.0.4",
     "html2canvas": "^1.0.0-alpha.12",
-    "ng4-date-countdown-timer": "^1.0.4",
     "ngx-infinite-scroll": "^6.0.0",
     "ngx-progressbar": "^2.1.1",
     "rxjs": "^6.0.0",

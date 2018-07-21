@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { AppService } from '../app.service';
 declare var $;
+export enum KEY_CODE {
+  RIGHT_ARROW = 39,
+  LEFT_ARROW = 37
+}
 
 
 @Component({
@@ -18,10 +22,34 @@ export class ResultComponent implements OnInit {
   noPastResults;
   lastData;
   subject;
+  i;
 
-  scripts = [
-    'assets/js/pages/activity.js',
-  ];
+  previous(i) {
+    if (this.i !== 0) {
+      this.i = i - 1;
+      return;
+    }
+      $.notify('This is the first');
+  }
+    next(i) {
+      if (this.questions.length - 1 !== this.i) {
+        this.i = i + 1;
+        return;
+      }
+      $.notify('This is the last');
+  }
+  @HostListener('window:keyup', ['$event'])
+keyEvent(event: KeyboardEvent) {
+  console.log(event);
+  if (event.keyCode === KEY_CODE.RIGHT_ARROW) {
+    this.next(this.i);
+  }
+
+  if (event.keyCode === KEY_CODE.LEFT_ARROW) {
+    this.previous(this.i);
+  }
+}
+
   constructor(
     private appService: AppService
   ) { }

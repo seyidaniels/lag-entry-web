@@ -48,60 +48,66 @@
   </div>
 </div>
 
-<div class="row" *ngIf="showAnswers"  >
-<div class="col-md-6 col-lg-6 offset-lg-2 offset-md-2">
-  <div class="block">
-      <div class="block-header text-center">
-          <div class="font-size-h4 font-w600 text-center"> {{questions.length}} Questions</div>
-      </div>
-  </div>
-  <div class="block" *ngFor="let question of questions; let i = index;"> 
-  <div class="block-content" >
-      <div class="alert alert-success" *ngIf="questions[i]['answer'] ===  userAnswers[i]">
-            👏  You got this one!
-      </div>
-      <div class="alert alert-info" *ngIf="userAnswers[i] === empty">
-            👎 You didnt attempt this!
-      </div>
-      <div class="alert alert-danger" *ngIf="(questions[i]['answer']  !== userAnswers[i]) && userAnswers[i] !== empty">
-            😥 You failed this!
-      </div>
-      <p class="lead font-weight-normal">{{question.question}}</p>
-      <hr>
-      <div class="row no-gutters items-push">
-          <div class="col-12">
-              <label class="css-control css-control-lg css-control-primary css-checkbox">
-                <p class="lead"> <span *ngIf="question.answer !== 'a'"><i class="fas fa-times text-danger"></i></span>  <span *ngIf="question.answer === 'a'"><i class="fas fa-check text-success"></i></span> {{question.optiona}}</p>
-              </label>
-          </div>
-          <div class="col-12">
-                  <label class="css-control css-control-lg css-control-primary css-checkbox">
-                      <p class="lead"> <span *ngIf="question.answer !== 'b'"><i class="fas fa-times text-danger"></i></span>  <span *ngIf="question.answer === 'b'"><i class="fas fa-check text-success"></i></span> {{question.optionb}}</p>
-                  </label>
-          </div>
-          <div class="col-12 ">
-                      <label class="css-control css-control-lg css-control-primary css-checkbox">
-                          <p class="lead"> <span *ngIf="question.answer !== 'c'"><i class="fas fa-times text-danger"></i></span>  <span *ngIf="question.answer === 'c'"><i class="fas fa-check text-success"></i></span> {{question.optionc}}</p> 
-                      </label>
-           </div>
-          <div class="col-12">
-                      <label class="css-control css-control-lg css-control-primary css-checkbox">
-                        <p class="lead">  <span *ngIf="question.answer !== 'd'"><i class="fas fa-times text-danger"></i></span>  <span *ngIf="question.answer === 'd'"><i class="fas fa-check text-success"></i></span> {{question.optiond}}</p>
-                      </label>
-          </div>
-      </div>
-  </div>
-  </div>
-</div>
-
-<div class="col-md-3 col-lg-3 order-sm-1">
-              <a class="block block-rounded block-bordered block-link-shadow text-center"  (click)="showAnswers = !showAnswers"  href="javascript:void(0)">
-                  <div class="block-content">
-                      <p class="mt-5">
-                          <i class="fas fa-arrow-left text-default"></i>
-                      </p>
-                      <p class="font-w600">See Result</p>
-                  </div>
-              </a> 
-</div>
+<div class="row justify-content-center" *ngIf="showAnswers" >
+        <div class="col-md-3  col-lg-3 order-sm-1">
+                <a class="block block-rounded block-bordered block-link-shadow text-center"  (click)="showAnswers = !showAnswers"  href="javascript:void(0)">
+                    <div class="block-content">
+                        <p class="mt-5">
+                            <i class="fas fa-arrow-left text-default"></i>
+                        </p>
+                        <p class="font-w600">See Result</p>
+                    </div>
+                </a> 
+        </div>
+        <div class="col-md-6 col-lg-6 " >                                   
+            <div class="block" >
+                    <div>
+                            <ngb-alert *ngIf="successMessage" type="info" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                    </div>
+                <div class="block-header block-header-default">   
+                    <h3 class="block-title lead">Question Number {{i+1}}</h3>
+                </div>
+                <div class="block-content" >
+                    <p class="lead font-weight-normal">{{questions[i].question}} </p>
+                    <nav class="clearfix push mt-4">
+                        <button type="button" class="btn btn-alt-secondary min-width-100 float-right sticky-top" (click) = "next(i)" placement="top" ngbTooltip="Next Question">Next</button>
+                        <button type="button" class="btn btn-alt-secondary min-width-100 float-left sticky-top" (click) ="previous(i)" placement="top" ngbTooltip="Previous Question">Previous</button>
+                    </nav>
+                    <hr>
+                    <div class="block-content" >
+                        <div class="alert alert-success" *ngIf="questions[i]['answer'] ===  userAnswers[i]">
+                            👏  You got this one!
+                        </div>
+                        <div class="alert alert-info" *ngIf="userAnswers[i] === empty">
+                            👎 You didnt attempt this!
+                        </div>
+                        <div class="alert alert-danger" *ngIf="(questions[i]['answer']  !== userAnswers[i]) && userAnswers[i] !== empty">
+                            😥 You failed this!
+                        </div>
+                        <div class="row no-gutters items-push">
+                            <div class="col-12">
+                                <label class="css-control css-control-lg css-control-primary css-checkbox">
+                                <p class="lead"> <span *ngIf="userAnswers[i] !== 'a'"><i class="fas fa-times text-danger"></i></span>  <span *ngIf="userAnswers[i] === 'a'"><i class="fas fa-check text-success"></i></span> {{questions[i].optiona}}</p>
+                                </label>
+                            </div>
+                            <div class="col-12">
+                                    <label class="css-control css-control-lg css-control-primary css-checkbox">
+                                        <p class="lead"> <span *ngIf="userAnswers[i] !== 'b'"><i class="fas fa-times text-danger"></i></span>  <span *ngIf="userAnswers[i] === 'b'"><i class="fas fa-check text-success"></i></span> {{questions[i].optionb}}</p>
+                                    </label>
+                            </div>
+                            <div class="col-12 ">
+                                        <label class="css-control css-control-lg css-control-primary css-checkbox">
+                                            <p class="lead"> <span *ngIf="userAnswers[i] !== 'c'"><i class="fas fa-times text-danger"></i></span>  <span *ngIf="userAnswers[i] === 'c'"><i class="fas fa-check text-success"></i></span> {{questions[i].optionc}}</p> 
+                                        </label>
+                            </div>
+                            <div class="col-12">
+                                        <label class="css-control css-control-lg css-control-primary css-checkbox">
+                                        <p class="lead">  <span *ngIf="userAnswers[i] !== 'd'"><i class="fas fa-times text-danger"></i></span>  <span *ngIf="userAnswers[i] === 'd'"><i class="fas fa-check text-success"></i></span> {{questions[i].optiond}}</p>
+                                        </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>

@@ -83,6 +83,12 @@ export class AuthenticationComponent implements OnInit {
           }, 2500);
           return;
         }
+        if (data['error']) {
+          this.register_errors = data['error'];
+          submitBTN.disabled = false;
+          submitBTN.innerHTML = '<i class="si si-user-follow mr-10"></i> Sign Up';
+          return;
+        }
       }
     );
   }
