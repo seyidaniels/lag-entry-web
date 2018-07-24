@@ -23,13 +23,13 @@ const routes: Routes = [
   {path: 'mock-result/:randomGen', component: MockResultComponent, canActivate: [AuthGuard]},
   {path: 'server-error', component: ServerErrorComponent, canActivate: [AuthGuard]},
   {path: 'about-unilag', component: AboutComponent,  canActivate: [AuthGuard]},
-  {path: 'aggregate', component: AggregateComponent, canActivate: [AuthGuard]}
+  {path: 'aggregate', component: AggregateComponent, canActivate: [AuthGuard]},
  ];
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {useHash: true})
   ],
   exports: [
     RouterModule

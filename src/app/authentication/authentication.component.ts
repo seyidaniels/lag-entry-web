@@ -8,6 +8,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AuthService } from '../auth.service';
 import {Validation} from '../Validation';
 
+declare var $: any;
 
 @Component({
   selector: 'app-auth',
@@ -53,6 +54,7 @@ export class AuthenticationComponent implements OnInit {
         password: new FormControl(''),
         password_confirmation: new FormControl(''),
         course: new FormControl(''),
+        pin: new FormControl(''),
         jambScore: new FormControl('')
       });
   }
@@ -84,7 +86,7 @@ export class AuthenticationComponent implements OnInit {
           return;
         }
         if (data['error']) {
-          this.register_errors = data['error'];
+          this.error(data['error']);
           submitBTN.disabled = false;
           submitBTN.innerHTML = '<i class="si si-user-follow mr-10"></i> Sign Up';
           return;
@@ -106,6 +108,7 @@ export class AuthenticationComponent implements OnInit {
           data => {
             if (data['validation_errors']) {
               this.signin_validation_errors = data['validation_errors'];
+              this.error(this.signin_validation_errors);
               submitBTN.innerHTML = '<i class="fas fa-sign-in-alt mr-10"></i> Sign In Again! ';
               submitBTN.disabled = false;
               return;
@@ -159,5 +162,9 @@ export class AuthenticationComponent implements OnInit {
     const base64 = base64Url.replace('-', '+').replace('_', '/');
     const decodedToken = JSON.parse(window.atob(base64));
     localStorage.setItem('token', token);
+  }
+
+  error(value) {
+    $.notify({message: value }, { type: 'danger'});
   }
 }

@@ -36,13 +36,16 @@
                                 If you would like to use the same navigation in both mobiles and desktops, you can use exactly the same markup inside sidebar and header navigation ul lists
                                 -->
                                 <ul class="nav-main">
-                                    <li>
-                                        <a class="active" routerLink="/"><i class="si si-compass"></i>Dashboard</a>
+                                    <li routerLinkActive="active">
+                                        <a  href="index.html"><i class="si si-compass"></i>Dashboard</a>
                                     </li>
-                                    <li>
+                                    <li routerLinkActive="active">
                                         <a  routerLink="/mock"><i class="si si-compass"></i>Mock</a>
                                     </li>
-                                    <li>
+                                    <li routerLinkActive="active">
+                                        <a  routerLink="/aggregate"><i class="si si-compass"></i>Aggregate</a>
+                                    </li>
+                                    <li routerLinkActive="active">
                                         <a  href="/about"><i class="si si-compass"></i>About UNILAG</a>
                                     </li>
                                     
@@ -85,12 +88,12 @@
                             -->
                               <ul class="nav-main-header">
                           <li routerLinkActive="active" >
-                              <a href="/dashboard"><i class="fas fa-camera-retro"></i>Dashboard</a>
+                              <a href="index.html"><i class="fas fa-camera-retro"></i>Dashboard</a>
                           </li>
                           <li routerLinkActive="active">
                               <a routerLink="/mock"><i class="si si-magnifier"></i>Mock Examination</a>
                           </li>
-                          <li href="active">
+                          <li routerLinkActive="active">
                               <a  routerLink="/about-unilag"><i class="si si-action-undo"></i>About UNILAG</a>
                           </li>
                           <li routerLinkActive="active">

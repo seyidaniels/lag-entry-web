@@ -35,14 +35,14 @@ export class AppService {
       subject: subject,
       number: number
     };
-    return this.http.post('http://localhost:8000/api/get-questions?token=' + this.token, body, {headers: headers})
+    return this.http.post('http://lagpostume.com/api/get-questions?token=' + this.token, body, {headers: headers})
       .pipe(
         catchError(this.handleError('getQuotes', []))
       );
   }
 
   getAllComb() {
-    return this.http.get('http://localhost:8000/api/test-all?token=' + this.token)
+    return this.http.get('http://lagpostume.com/api/test-all?token=' + this.token)
       .pipe(
         catchError(this.handleError('getQuotes', []))
       );
@@ -59,7 +59,7 @@ export class AppService {
   }
 
   deleteResult(uniqueKey) {
-    return this.http.delete('http://localhost:8000/api/delete-result/' + uniqueKey + '?token=' + this.token ).pipe(
+    return this.http.delete('http://lagpostume.com/api/delete-result/' + uniqueKey + '?token=' + this.token ).pipe(
       catchError(this.handleError('getQuotes', []))
     );
   }
@@ -69,51 +69,51 @@ export class AppService {
   }
 
   getPastResults() {
-    return this.http.get('http://localhost:8000/api/past-results?token=' + this.token ).pipe(
+    return this.http.get('http://lagpostume.com/api/past-results?token=' + this.token ).pipe(
       catchError(this.handleError('getQuotes', []))
     );
   }
 
   updateProfile(body) {
-    return this.http.put('http://localhost:8000/api/update-profile?token= ' + this.token, body, {headers: headers}).pipe(
+    return this.http.put('http://lagpostume.com/api/update-profile?token= ' + this.token, body, {headers: headers}).pipe(
       catchError(this.handleError('getQuotes', []))
     );
   }
 
   changePassword(body) {
-    return this.http.put('http://localhost:8000/api/change-password?token= ' + this.token, body, {headers: headers}).pipe(
+    return this.http.put('http://lagpostume.com/api/change-password?token= ' + this.token, body, {headers: headers}).pipe(
       catchError(this.handleError('getQuotes', []))
     );
   }
 
   saveResult(body) {
-    return this.http.post('http://localhost:8000/api/save-result?token=' + this.token, body, {headers: headers} ).pipe(
+    return this.http.post('http://lagpostume.com/api/save-result?token=' + this.token, body, {headers: headers} ).pipe(
       catchError(this.handleError('getQuotes', []))
     );
   }
 
   saveMock(body) {
-    return this.http.post('http://localhost:8000/api/save-mock-result?token=' + this.token, body, {headers: headers} ).pipe(
+    return this.http.post('http://lagpostume.com/api/save-mock-result?token=' + this.token, body, {headers: headers} ).pipe(
       catchError(this.handleError('getQuotes', []))
     );
   }
 
   getMockQuestions() {
-    return this.http.get('http://localhost:8000/api/get-mock-questions?token=' + this.token)
+    return this.http.get('http://lagpostume.com/api/get-mock-questions?token=' + this.token)
       .pipe(
         catchError(this.handleError('getQuotes', []))
       );
   }
 
   getMockResults () {
-    return this.http.get('http://localhost:8000/api/mock-results?token=' + this.token)
+    return this.http.get('http://lagpostume.com/api/mock-results?token=' + this.token)
       .pipe(
         catchError(this.handleError('getQuotes', []))
       );
   }
 
   getProfileStatistics () {
-    return this.http.get('http://localhost:8000/api/profile-stat?token=' + this.token)
+    return this.http.get('http://lagpostume.com/api/profile-stat?token=' + this.token)
       .pipe(
         catchError(this.handleError())
       );
@@ -123,8 +123,12 @@ export class AppService {
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
-      // TODO: send the error to remote logging infrastructure
-      console.error(error['status']); // log to console instead
+
+      if ( error['status'] === 0) {
+        $.notify({message: 'Ooops a server has error occured! Check your internet settings!' }, { type: 'danger'});
+        return;
+      }
+
       if (error['status'] === 401) {
         localStorage.removeItem('token');
         location.reload();

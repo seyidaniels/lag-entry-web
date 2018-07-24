@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
 
   userData;
   editProfile;
-  stats;
+  stats = true;
   changePword;
   updateForm;
   changePwordForm;

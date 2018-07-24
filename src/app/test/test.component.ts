@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, HostListener} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import { AppService } from '../app.service';
 import {NgProgress} from 'ngx-progressbar';
@@ -7,6 +7,11 @@ import {debounceTime} from 'rxjs/operators';
 import {ExamObject} from '../exam/examobject';
 
 declare var $;
+export enum KEY_CODE {
+  RIGHT_ARROW = 39,
+  LEFT_ARROW = 37
+}
+
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
@@ -21,10 +26,21 @@ export class TestComponent implements OnInit {
   i = 0;
   successMessage;
   correctAnswers: any;
-  questions = [''];
+  questions = new Array(0);
   private _success = new Subject<string>();
   userAnswer = new Array(this.questions.length);
   exam: ExamObject;
+
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if (event.keyCode === KEY_CODE.RIGHT_ARROW) {
+      this.next(this.i);
+    }
+    if (event.keyCode === KEY_CODE.LEFT_ARROW) {
+      this.previous(this.i);
+    }
+  }
+
   constructor(
     private route: ActivatedRoute,
     private appService: AppService,
@@ -35,6 +51,7 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.questions.length);
     setTimeout(() => this.staticAlertClosed = true, 20000);
     this.route.params.switchMap(
       (params: Params) => {

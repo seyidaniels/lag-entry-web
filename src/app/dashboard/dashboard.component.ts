@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit {
   subjects;
   waec_sum;
   waec_error;
+  data;
 
   ngOnInit() {
         this.loadWaecForm();
@@ -44,6 +45,13 @@ export class DashboardComponent implements OnInit {
         }
         // Store User Jamb Result
         localStorage.setItem('jamb_' + this.user_id, this.userData['jambScore']);
+        // Show Analytics
+        if (localStorage.getItem('data') === 'false') {
+            console.log('No results yet');
+            this.data = false;
+        } else {
+          this.data = true;
+        }
       }
 
       loadWaecForm () {
@@ -56,7 +64,7 @@ export class DashboardComponent implements OnInit {
         });
       }
   startQuiz(value) {
-    $('#modal-fadein').modal('show');
+    $('#modal-fadein').modal();
     this.selected = value;
   }
 

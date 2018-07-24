@@ -3,7 +3,7 @@
             <!-- Main Container -->
             <main id="main-container" >
                 <!-- Page Content -->
-                <div class="bg-gd-dusk">
+                <div class="">
                     <div class="hero-static content content-full bg-white invisible" data-toggle="appear">
                         <div *ngIf="!signup">
                           <div *ngIf="!forgot">
@@ -59,12 +59,12 @@
                                                         </div>
                                                         <div class="col-sm-6 mb-5">
                                                             <a class="btn btn-block btn-noborder btn-rounded btn-alt-secondary"  (click) = "signup = !signup" >
-                                                                <i class="fa fa-plus text-muted mr-5"></i> New Account
+                                                                <i class="fas fa-plus text-muted mr-5"></i> New Account
                                                             </a>
                                                         </div>
                                                         <div class="col-sm-6 mb-5">
                                                             <a class="btn btn-block btn-noborder btn-rounded btn-alt-secondary" (click)= " forgot = ! forgot">
-                                                                <i class="fa fa-warning text-muted mr-5"></i> Forgot password
+                                                                <i class="fas fa-warning text-muted mr-5"></i> Forgot password
                                                             </a>
                                                         </div>
                                                     </div>
@@ -101,7 +101,7 @@
                                     </div>
                                     <div class="form-group">
                                         <button (click)="clickResetPassword()" class="btn btn-block btn-hero btn-noborder btn-rounded btn-alt-primary">
-                                            <i class="fa fa-asterisk mr-10"></i> Password Reminder
+                                            <i class="fas fa-asterisk mr-10"></i> Password Reminder
                                         </button>
                                         <a class="btn btn-block btn-noborder btn-rounded btn-alt-secondary" (click) ="forgot = ! forgot" >
                                             <i class="si si-login text-muted mr-10"></i> Sign In
@@ -118,8 +118,7 @@
                                 <div class="py-30 px-5 text-center">
                                         <a class="link-effect font-w700" href="index.html">
                                             <i class="si si-fire"></i>
-                                            <span class="font-size-xl text-primary-dark">code</span><span class="font-size-xl">base</span>
-                                        </a>
+                                            <span class="font-size-xl text-primary-dark">lag</span><span class="font-size-xl">postume</span>                                        </a>
                                         <h1 class="h2 font-w700 mt-50 mb-10">Create New Account</h1>
                                         <h2 class="h4 font-w400 text-muted mb-0">Please add your details</h2>
                                 </div>
@@ -200,18 +199,6 @@
                                             <div class="form-group row">
                                                     <div class="col-12">
                                                         <div class="form-material ">
-                                                            <input type="text" class="form-control" formControlName="course"  >
-                                                            <label for="signup-course">Course</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="text-danger text-center" *ngIf="register_validation_errors">
-                                                        
-                                                        {{register_validation_errors.course}}
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                    <div class="col-12">
-                                                        <div class="form-material ">
                                                             <input type="number" class="form-control" formControlName="jambScore"  >
                                                             <label for="signup-jambScore">JAMB Score</label>
                                                         </div>
@@ -221,6 +208,34 @@
                                                             {{register_validation_errors.jambScore}}
                                                     </div>
                                             </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <div class="form-material ">
+                                                        <input type="text" class="form-control" formControlName="course"  >
+                                                        <label for="signup-course">Course </label>
+                                                    </div>
+                                                </div>
+                                                <div class="text-danger text-center" *ngIf="register_validation_errors">
+                                                    
+                                                        {{register_validation_errors.course}}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <div class="form-material ">
+                                                        <input type="text" maxlength="7" class="form-control" formControlName="pin"  >
+                                                        <label for="signup-pin">Your 7 character digit PIN</label>
+                                                        <p class="small text-danger">Contact 08176607259, 08168187018, 08106776859 for PIN </p>
+                                                    </div>
+                                                </div>
+                                                <div class="text-danger text-center" *ngIf="register_validation_errors">
+                                                    
+                                                        {{register_validation_errors.pin}}
+                                                </div>
+                                            </div>
+
                                             <div class="form-group row text-center">
                                                 <div class="col-12">
                                                     <p class="small text-info">By Signing Up, You are agreeing to our terms and conditions</p>
@@ -271,9 +286,8 @@
                         </div>
                     </div>
                     <div class="block-content">
-                        <p>Potenti elit lectus augue eget iaculis vitae etiam, ullamcorper etiam bibendum ad feugiat magna accumsan dolor, nibh molestie cras hac ac ad massa, fusce ante convallis ante urna molestie vulputate bibendum tempus ante justo arcu erat accumsan adipiscing risus, libero condimentum venenatis sit nisl nisi ultricies sed, fames aliquet consectetur consequat nostra molestie neque nullam scelerisque neque commodo turpis quisque etiam egestas vulputate massa, curabitur tellus massa venenatis congue dolor enim integer luctus, nisi suscipit gravida fames quis vulputate nisi viverra luctus id leo dictum lorem, inceptos nibh orci.</p>
-                        <p>Potenti elit lectus augue eget iaculis vitae etiam, ullamcorper etiam bibendum ad feugiat magna accumsan dolor, nibh molestie cras hac ac ad massa, fusce ante convallis ante urna molestie vulputate bibendum tempus ante justo arcu erat accumsan adipiscing risus, libero condimentum venenatis sit nisl nisi ultricies sed, fames aliquet consectetur consequat nostra molestie neque nullam scelerisque neque commodo turpis quisque etiam egestas vulputate massa, curabitur tellus massa venenatis congue dolor enim integer luctus, nisi suscipit gravida fames quis vulputate nisi viverra luctus id leo dictum lorem, inceptos nibh orci.</p>
-                        <p>Potenti elit lectus augue eget iaculis vitae etiam, ullamcorper etiam bibendum ad feugiat magna accumsan dolor, nibh molestie cras hac ac ad massa, fusce ante convallis ante urna molestie vulputate bibendum tempus ante justo arcu erat accumsan adipiscing risus, libero condimentum venenatis sit nisl nisi ultricies sed, fames aliquet consectetur consequat nostra molestie neque nullam scelerisque neque commodo turpis quisque etiam egestas vulputate massa, curabitur tellus massa venenatis congue dolor enim integer luctus, nisi suscipit gravida fames quis vulputate nisi viverra luctus id leo dictum lorem, inceptos nibh orci.</p>
+                        <p>Kindly note we are not in any way asssociated with the admissions office of the University of Lagos</p>
+                        <p>We are just e-solution providers</p>
                     </div>
                 </div>
                 <div class="modal-footer">

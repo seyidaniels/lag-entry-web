@@ -8,7 +8,9 @@ import 'Rxjs/rx';
 
 
 const headers = new HttpHeaders({'Content-Type': 'application/json'});
-const url = 'http://localhost:8000/api/auth/';
+const url = 'http://lagpostume.com/api/auth/';
+
+declare var $: any;
 
 @Injectable()
 export class AuthService {
@@ -53,7 +55,7 @@ export class AuthService {
   logout() {
     const token = this.getToken();
     const body = JSON.stringify({token: token});
-    return this.http.post('http://localhost:8000/api/logout', body, {headers: headers})
+    return this.http.post('http://lagpostume.com/api/logout', body, {headers: headers})
     .pipe(
       catchError(this.handleError('getQuotes', []))
     );
@@ -65,6 +67,12 @@ export class AuthService {
 
       // TODO: send the error to remote logging infrastructure
       console.error(error.error); // log to console instead
+      $.notify({
+        icon: 'fas fa-paw',
+        message: 'Oooops!Server Error! Try Again'
+      }, {
+        type: 'danger'
+      });
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };

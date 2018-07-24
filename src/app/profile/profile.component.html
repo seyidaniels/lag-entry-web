@@ -1,4 +1,4 @@
-<div class="bg-image bg-image-bottom" style="background-image: url('assets/img/photos/photo13@2x.jpg');">
+<div class="bg-image " style="background-image: url('assets/img/photos/banner.jpg'); ">
   <div class="bg-primary-dark-op">
       <div class="content content-full text-center">
           <!-- Personal -->
@@ -8,7 +8,7 @@
           </h2>
           <!-- END Personal -->
 
-          <!-- Actions -->
+          <!-- Actions --> 
           <button type="button" class="btn btn-rounded btn-hero btn-sm btn-alt-success mb-5" (click) ="clickEditProfile()">
               <i class="far fa-edit mr-5"></i> Edit Profile
           </button>
@@ -20,7 +20,7 @@
   </div>
 </div>
 
-<div class="row gutters-tiny mt-20 justify-content-center" *ngIf="!stats">
+<div class="row gutters-tiny mt-20 justify-content-center" *ngIf="stats">
     <div class="col-6 col-md-4 col-xl-2">
         <a class="block block-transparent text-center bg-primary" href="javascript:void(0)">
             <div class="block-content">
@@ -38,7 +38,7 @@
                     <strong> {{statistics['highestMock']}} </strong>
                 </p>
                 <p class="font-w600 text-white-op">
-                    <i class="fa fa-envelope mr-5"></i> Highest Mock Score
+                    <i class="fas fa-stack mr-5"></i> Highest Mock Score
                 </p>
             </div>
         </a>
@@ -50,7 +50,7 @@
                     <strong>{{statistics['highestAggregate']}}%</strong>
                 </p>
                 <p class="font-w600 text-white-op">
-                    <i class="fa fa-shopping-cart mr-5"></i> Highest Aggregate
+                    <i class="fas fa-archive mr-5"></i> Highest Aggregate
                 </p>
             </div>
         </a>

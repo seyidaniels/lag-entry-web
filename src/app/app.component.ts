@@ -54,7 +54,7 @@ export class AppComponent implements OnInit {
           localStorage.removeItem('token');
           localStorage.removeItem('user');
           this.loggedIn = false;
-          location.reload();
+          location.href = 'index.html';
         }
       }
     );

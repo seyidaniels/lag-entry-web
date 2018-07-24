@@ -54,21 +54,16 @@
                 <h3 class="block-title">
                     Last Five Aggregate Scores
                 </h3>
-                <div class="block-options">
-                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
-                        <i class="si si-refresh"></i>
-                    </button>
-                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
-                    <button type="button" class="btn-block-option">
-                        <i class="si si-wrench"></i>
-                    </button>
-                </div>
             </div>
-            <div class="block-content block-content-full">
+            <div class="block-content block-content-full" *ngIf="data">
                 <div class="pull-all">
                     <!-- Lines Chart Container -->
                     <canvas class="js-chartjs-dashboard-lines"></canvas>
                 </div>
+            </div>
+
+            <div class="block-content block-content-full" *ngIf="!data">
+                <h3 class="block-title">Do more Mock Questions to monitor your performance</h3>
             </div>
         </div>
     </div>

@@ -1,13 +1,16 @@
 
     function getData() {
         var token = localStorage.getItem('token');
-        var url = 'http://localhost:8000/api/last-five?token='+token;       
+        var url = 'http://lagpostume.com/api/last-five?token='+token;       
         jQuery.get(url, function (data) {
             if (data['scores']) {
-               localStorage.setItem('data', JSON.stringify(data['scores']));
-               console.log(data['date']);
-               localStorage.setItem('data-date', JSON.stringify(data['date']));
+               localStorage.setItem('data', JSON.stringify(data['scores'].reverse()));
+               if (data['scores'].length === 0) {
+                   localStorage.setItem('data', false);
+               }
+               localStorage.setItem('data-date', JSON.stringify(data['date'].reverse()));
             }
+
         })         
     }
 
@@ -78,10 +81,6 @@
             // Init Charts
             if ( chartDashboardLinesCon.length ) {
                 chartDashboardLines  = new Chart(chartDashboardLinesCon, { type: 'line', data: chartDashboardLinesData, options: chartDashboardLinesOptions });
-            }
-    
-            if ( chartDashboardLinesCon2.length ) {
-                chartDashboardLines2 = new Chart(chartDashboardLinesCon2, { type: 'line', data: chartDashboardLinesData2, options: chartDashboardLinesOptions2 });
             }
         };
     
